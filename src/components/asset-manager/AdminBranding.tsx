@@ -18,6 +18,12 @@ export function AdminBranding() {
   const { branding, updateBranding } = useBranding();
   const [tempColor, setTempColor] = useState(branding.primaryColor);
   const [tempCompanyName, setTempCompanyName] = useState(branding.companyName);
+  const [showLogoSelector, setShowLogoSelector] = useState(false);
+
+  const availableLogos = [
+    { id: 'fenergo', name: 'Fenergo Logo', url: '/portal_prototype/fen_logo.svg.png' },
+    { id: 'br', name: 'BR Logo', url: '/portal_prototype/BR_logo.png' },
+  ];
 
   const fenergoColors = [
     { name: 'Primary Teal', value: '#21CFB2' },
@@ -26,6 +32,7 @@ export function AdminBranding() {
     { name: 'Soft Teal', value: '#71E0CE' },
     { name: 'Pale Teal', value: '#8CE6D7' },
     { name: 'Lightest Teal', value: '#A6ECE0' },
+    { name: 'Pure Black', value: '#000000' },
   ];
 
   const presetThemes = [
@@ -52,6 +59,13 @@ export function AdminBranding() {
       companyName: 'Fenergo',
       logoUrl: 'fenergo',
     });
+  };
+
+  const handleLogoSelect = (logoId: string) => {
+    updateBranding({
+      logoUrl: logoId,
+    });
+    setShowLogoSelector(false);
   };
 
   const handleThemeSelect = (theme: typeof presetThemes[0]) => {
@@ -93,24 +107,64 @@ export function AdminBranding() {
             
             <div className="space-y-4">
               <div className="p-8 border-2 border-dashed rounded-lg text-center bg-slate-50">
-                <div className="size-16 bg-white rounded-lg flex items-center justify-center mx-auto mb-4">
+                <div className="size-16 bg-white rounded-lg flex items-center justify-center mx-auto mb-4 p-2">
                   {branding.logoUrl === 'fenergo' ? (
                     <img 
-                      src="data:image/png;base64,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" 
+                      src="/portal_prototype/fen_logo.svg.png" 
                       alt="Fenergo"
-                      className="h-8"
+                      className="h-8 object-contain"
+                    />
+                  ) : branding.logoUrl === 'br' ? (
+                    <img 
+                      src="/portal_prototype/BR_logo.png" 
+                      alt="BR"
+                      className="h-8 object-contain"
                     />
                   ) : (
                     <Palette className="size-8 text-slate-400" />
                   )}
                 </div>
                 <p className="text-slate-900 mb-2">Current Logo</p>
-                <p className="text-slate-500 mb-4">Recommended: SVG or PNG, max 200px height</p>
-                <Button variant="outline" size="sm">
+                <p className="text-slate-500 mb-4">
+                  {branding.logoUrl === 'fenergo' ? 'Fenergo Logo' : branding.logoUrl === 'br' ? 'BR Logo' : 'No logo selected'}
+                </p>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setShowLogoSelector(!showLogoSelector)}
+                >
                   <Upload className="size-4 mr-2" />
-                  Upload New Logo
+                  Select Logo
                 </Button>
               </div>
+
+              {showLogoSelector && (
+                <div className="grid grid-cols-2 gap-4 p-4 border rounded-lg bg-white">
+                  {availableLogos.map((logo) => (
+                    <button
+                      key={logo.id}
+                      onClick={() => handleLogoSelect(logo.id)}
+                      className={`p-4 border-2 rounded-lg hover:bg-slate-50 transition-all ${
+                        branding.logoUrl === logo.id
+                          ? 'border-blue-500 bg-blue-50'
+                          : 'border-slate-200'
+                      }`}
+                    >
+                      <div className="h-16 flex items-center justify-center mb-2 bg-white rounded p-2">
+                        <img 
+                          src={logo.url} 
+                          alt={logo.name}
+                          className="max-h-12 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-slate-900">{logo.name}</p>
+                      {branding.logoUrl === logo.id && (
+                        <Badge className="mt-2 bg-blue-100 text-blue-700 text-xs">Selected</Badge>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               <div className="space-y-2">
                 <Label htmlFor="companyName">Company Name</Label>
@@ -134,8 +188,8 @@ export function AdminBranding() {
             <div className="space-y-6">
               {/* Fenergo Teal Palette */}
               <div>
-                <Label className="mb-3 block">Fenergo Teal Palette</Label>
-                <div className="grid grid-cols-6 gap-3">
+                <Label className="mb-3 block">Fenergo Color Palette</Label>
+                <div className="grid grid-cols-7 gap-3">
                   {fenergoColors.map((color) => (
                     <button
                       key={color.value}
@@ -237,26 +291,27 @@ export function AdminBranding() {
               <div>
                 <Label className="mb-2 block">Portal Header</Label>
                 <div className="border rounded-lg p-4 bg-white">
-                  <div className="flex items-center gap-2">
-                    <div
-                      className="size-8 rounded-lg flex items-center justify-center"
-                      style={{ 
-                        background: `linear-gradient(to bottom right, ${tempColor}, ${tempColor}dd)` 
-                      }}
-                    >
+                  <div className="flex items-center gap-3">
+                    <div className="h-8 bg-white rounded flex items-center justify-center p-1">
                       {branding.logoUrl === 'fenergo' ? (
                         <img 
-                          src="data:image/png;base64,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"
+                          src="/portal_prototype/fen_logo.svg.png"
                           alt="Logo"
-                          className="h-5 brightness-0 invert"
+                          className="h-6 object-contain"
+                        />
+                      ) : branding.logoUrl === 'br' ? (
+                        <img 
+                          src="/portal_prototype/BR_logo.png"
+                          alt="Logo"
+                          className="h-6 object-contain"
                         />
                       ) : (
-                        <span className="text-white">Logo</span>
+                        <span className="text-slate-400 text-xs">Logo</span>
                       )}
                     </div>
                     <div>
-                      <div className="text-slate-900">{tempCompanyName}</div>
-                      <div className="text-slate-500">Investor Portal</div>
+                      <div className="text-slate-900 font-semibold">{tempCompanyName}</div>
+                      <div className="text-slate-500 text-sm">Investor Portal</div>
                     </div>
                   </div>
                 </div>

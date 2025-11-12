@@ -16,11 +16,13 @@ export function LandingPage({ onLogin }: LandingPageProps) {
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="size-8 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-              <Shield className="size-5 text-white" />
-            </div>
-            <span className="text-slate-900">FundFlow Portal</span>
+          <div className="flex items-center gap-3">
+            <img 
+              src="/portal_prototype/fen_logo.svg.png" 
+              alt="Fenergo" 
+              className="h-8"
+            />
+            <span className="text-slate-900 font-semibold">Fenergo FundFlow</span>
           </div>
           <Button variant="outline" onClick={() => onLogin('investor')}>
             Sign In
@@ -104,7 +106,7 @@ export function LandingPage({ onLogin }: LandingPageProps) {
       {/* Footer */}
       <footer className="border-t bg-white/80 backdrop-blur-sm mt-16">
         <div className="container mx-auto px-4 py-8 text-center text-slate-500">
-          <p>© 2025 FundFlow Portal. Prototype demonstrating institutional fund management capabilities.</p>
+          <p>© 2025 Fenergo FundFlow. Prototype demonstrating institutional fund management capabilities.</p>
         </div>
       </footer>
     </div>
