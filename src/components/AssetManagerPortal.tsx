@@ -68,16 +68,9 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
       {/* Sidebar */}
       <aside className="w-64 bg-slate-900 text-white flex flex-col">
         <div className="p-4 border-b border-slate-800">
-          <div className="flex items-center gap-2">
-            <img 
-              src="/portal_prototype/fen_logo.jpg" 
-              alt="Fenergo"
-              className="h-6 object-contain brightness-0 invert"
-            />
-            <div>
-              <div className="text-white font-semibold">FundFlow</div>
-              <div className="text-slate-400 text-xs">Asset Manager</div>
-            </div>
+          <div>
+            <div className="text-white font-semibold">FundFlow</div>
+            <div className="text-slate-400 text-xs">Asset Manager</div>
           </div>
         </div>
 
@@ -116,7 +109,15 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
 
       {/* Main Content */}
       <main className="flex-1 overflow-auto flex flex-col">
-        <div className="border-b bg-white px-6 py-3 flex justify-end">
+        <div className="border-b bg-white px-6 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <img 
+              src="/portal_prototype/fen_logo.jpg" 
+              alt="Fenergo"
+              className="h-8 object-contain"
+            />
+            <span className="text-slate-900 font-semibold">FundFlow</span>
+          </div>
           <div className="h-8 flex items-center">
             <img 
               src={branding.logoUrl === 'fenergo' 

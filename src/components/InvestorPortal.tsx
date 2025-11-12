@@ -65,16 +65,9 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r flex flex-col">
         <div className="p-4 border-b">
-          <div className="flex items-center gap-2">
-            <img 
-              src="/portal_prototype/fen_logo.jpg" 
-              alt="Fenergo"
-              className="h-6 object-contain"
-            />
-            <div>
-              <div className="text-slate-900 font-semibold">FundFlow</div>
-              <div className="text-slate-500 text-xs">Investor Portal</div>
-            </div>
+          <div>
+            <div className="text-slate-900 font-semibold">FundFlow</div>
+            <div className="text-slate-500 text-xs">Investor Portal</div>
           </div>
         </div>
 
@@ -114,7 +107,15 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
 
       {/* Main Content */}
       <main className="flex-1 overflow-auto flex flex-col">
-        <div className="border-b bg-white px-6 py-3 flex justify-end">
+        <div className="border-b bg-white px-6 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <img 
+              src="/portal_prototype/fen_logo.jpg" 
+              alt="Fenergo"
+              className="h-8 object-contain"
+            />
+            <span className="text-slate-900 font-semibold">FundFlow</span>
+          </div>
           <div className="h-8 flex items-center">
             <img 
               src={branding.logoUrl === 'fenergo' 
