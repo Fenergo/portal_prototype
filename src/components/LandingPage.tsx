@@ -22,11 +22,27 @@ export function LandingPage({ onLogin }: LandingPageProps) {
               alt="Fenergo" 
               className="h-8"
             />
-            <span className="text-slate-900 font-semibold">Fenergo FundFlow</span>
+            <span className="text-slate-900 font-semibold">FundFlow</span>
           </div>
-          <Button variant="outline" onClick={() => onLogin('investor')}>
-            Sign In
-          </Button>
+          <div className="flex items-center gap-4">
+            {branding.logoUrl && (
+              <div className="h-8 flex items-center">
+                <img 
+                  src={branding.logoUrl === 'fenergo' 
+                    ? '/portal_prototype/fen_logo.jpg' 
+                    : branding.logoUrl === 'br' 
+                    ? '/portal_prototype/BR_logo.png'
+                    : '/portal_prototype/fen_logo.jpg'
+                  } 
+                  alt={branding.companyName}
+                  className="h-8 object-contain"
+                />
+              </div>
+            )}
+            <Button variant="outline" onClick={() => onLogin('investor')}>
+              Sign In
+            </Button>
+          </div>
         </div>
       </header>
 
