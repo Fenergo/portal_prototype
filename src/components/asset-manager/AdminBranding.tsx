@@ -21,7 +21,7 @@ export function AdminBranding() {
   const [showLogoSelector, setShowLogoSelector] = useState(false);
 
   const availableLogos = [
-    { id: 'fenergo', name: 'Fenergo Logo', url: '/portal_prototype/fen_logo.svg.png' },
+    { id: 'fenergo', name: 'Fenergo Logo', url: '/portal_prototype/fen_logo.jpg' },
     { id: 'br', name: 'BR Logo', url: '/portal_prototype/BR_logo.png' },
   ];
 
@@ -110,7 +110,7 @@ export function AdminBranding() {
                 <div className="size-16 bg-white rounded-lg flex items-center justify-center mx-auto mb-4 p-2">
                   {branding.logoUrl === 'fenergo' ? (
                     <img 
-                      src="/portal_prototype/fen_logo.svg.png" 
+                      src="/portal_prototype/fen_logo.jpg" 
                       alt="Fenergo"
                       className="h-8 object-contain"
                     />
@@ -295,7 +295,7 @@ export function AdminBranding() {
                     <div className="h-8 bg-white rounded flex items-center justify-center p-1">
                       {branding.logoUrl === 'fenergo' ? (
                         <img 
-                          src="/portal_prototype/fen_logo.svg.png"
+                          src="/portal_prototype/fen_logo.jpg"
                           alt="Logo"
                           className="h-6 object-contain"
                         />

@@ -18,7 +18,7 @@ export function LandingPage({ onLogin }: LandingPageProps) {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img 
-              src="/portal_prototype/fen_logo.svg.png" 
+              src="/portal_prototype/fen_logo.jpg" 
               alt="Fenergo" 
               className="h-8"
             />
