@@ -23,6 +23,7 @@ export function AdminBranding() {
   const availableLogos = [
     { id: 'fenergo', name: 'Fenergo Logo', url: '/portal_prototype/fen_logo.jpg' },
     { id: 'br', name: 'BR Logo', url: '/portal_prototype/BR_logo.png' },
+    { id: 'azg', name: 'AzG Logo', url: '/portal_prototype/AzG_logo.png' },
   ];
 
   const fenergoColors = [
@@ -38,7 +39,7 @@ export function AdminBranding() {
   const presetThemes = [
     { name: 'Fenergo (Default)', primary: '#21CFB2', logo: 'fenergo' },
     { name: 'Navy Blue', primary: '#1E40AF', logo: null },
-    { name: 'Forest Green', primary: '#059669', logo: null },
+    { name: 'Cyan', primary: '#00A2A9', logo: null },
     { name: 'Royal Purple', primary: '#7C3AED', logo: null },
     { name: 'Crimson Red', primary: '#DC2626', logo: null },
     { name: 'Slate Gray', primary: '#475569', logo: null },

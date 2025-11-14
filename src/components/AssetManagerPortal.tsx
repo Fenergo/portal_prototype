@@ -140,6 +140,8 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
                 ? '/portal_prototype/fen_logo.jpg' 
                 : branding.logoUrl === 'br' 
                 ? '/portal_prototype/BR_logo.png'
+                : branding.logoUrl === 'azg'
+                ? '/portal_prototype/AzG_logo.png'
                 : '/portal_prototype/fen_logo.jpg'
               } 
               alt={branding.companyName}
