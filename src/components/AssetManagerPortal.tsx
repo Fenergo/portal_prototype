@@ -127,12 +127,12 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
       <main className="flex-1 overflow-auto flex flex-col">
         <div className="border-b bg-white px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
+            <span className="text-slate-600 text-sm" style={{ fontFamily: 'Poppins, sans-serif' }}>powered by</span>
             <img 
               src="/portal_prototype/fen_logo.jpg" 
               alt="Fenergo"
               className="h-8 object-contain"
             />
-            <span className="text-slate-900 font-bold" style={{ fontFamily: 'Poppins, sans-serif', fontSize: '20px' }}>fundflow</span>
           </div>
           <div className="h-8 flex items-center">
             <img 
