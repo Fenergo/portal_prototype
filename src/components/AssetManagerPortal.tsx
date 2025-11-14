@@ -72,7 +72,7 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
       >
         <div className="p-4 border-b border-white/20">
           <div>
-            <div className="text-white font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>FundFlow</div>
+            <div className="text-white font-bold" style={{ fontFamily: 'Poppins, sans-serif', fontSize: '20px' }}>fundflow</div>
             <div className="text-white/70 text-xs" style={{ fontFamily: 'Poppins, sans-serif' }}>Asset Manager Workbench</div>
           </div>
         </div>
@@ -132,7 +132,7 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
               alt="Fenergo"
               className="h-8 object-contain"
             />
-            <span className="text-slate-900 font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>FundFlow</span>
+            <span className="text-slate-900 font-bold" style={{ fontFamily: 'Poppins, sans-serif', fontSize: '20px' }}>fundflow</span>
           </div>
           <div className="h-8 flex items-center">
             <img 
