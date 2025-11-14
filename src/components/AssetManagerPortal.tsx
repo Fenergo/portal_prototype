@@ -88,8 +88,18 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
                   isActive
                     ? 'bg-white/20 text-white'
-                    : 'text-white/70 hover:bg-white/15 hover:text-white'
+                    : 'text-white/70 hover:text-white'
                 }`}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }
+                }}
               >
                 <Icon className="size-5" />
                 <span>{item.label}</span>
