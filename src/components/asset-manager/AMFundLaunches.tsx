@@ -2,6 +2,7 @@ import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Progress } from '../ui/progress';
+import { useBranding } from '../BrandingContext';
 import { 
   Rocket,
   Users,
@@ -13,6 +14,7 @@ import {
 } from 'lucide-react';
 
 export function AMFundLaunches() {
+  const { branding } = useBranding();
   const launches = [
     {
       id: 'LAUNCH-001',
@@ -67,7 +69,7 @@ export function AMFundLaunches() {
           <h1 className="text-slate-900">Fund Launches</h1>
           <p className="text-slate-600">Manage fund launch campaigns and track invitation metrics</p>
         </div>
-        <Button className="gap-2">
+        <Button className="gap-2" style={{ backgroundColor: branding.primaryColor }}>
           <Plus className="size-4" />
           Create New Launch
         </Button>
@@ -220,7 +222,7 @@ export function AMFundLaunches() {
                 {/* Actions */}
                 {launch.status === 'draft' && (
                   <div className="flex gap-2 pt-4 border-t">
-                    <Button>Activate Launch</Button>
+                    <Button style={{ backgroundColor: branding.primaryColor }}>Activate Launch</Button>
                     <Button variant="outline">Preview Microsite</Button>
                     <Button variant="outline">Manage Materials</Button>
                   </div>

@@ -3,6 +3,7 @@ import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import { useBranding } from '../BrandingContext';
 import { 
   Building2,
   TrendingUp,
@@ -14,6 +15,7 @@ import {
 } from 'lucide-react';
 
 export function AMDueDiligence() {
+  const { branding } = useBranding();
   const [activeTab, setActiveTab] = useState('counterparty');
 
   const counterparties = [
@@ -215,7 +217,7 @@ export function AMDueDiligence() {
                     </Button>
                     <Button variant="outline" size="sm">Review Documents</Button>
                     {cp.status === 'in-review' && (
-                      <Button size="sm">Approve</Button>
+                      <Button size="sm" style={{ backgroundColor: branding.primaryColor }}>Approve</Button>
                     )}
                   </div>
                 </div>
@@ -307,7 +309,7 @@ export function AMDueDiligence() {
                     </Button>
                     <Button variant="outline" size="sm">ESG Analysis</Button>
                     {sec.status === 'ic-review' && (
-                      <Button size="sm">Record IC Decision</Button>
+                      <Button size="sm" style={{ backgroundColor: branding.primaryColor }}>Record IC Decision</Button>
                     )}
                   </div>
                 </div>

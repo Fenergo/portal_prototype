@@ -3,6 +3,7 @@ import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Input } from '../ui/input';
+import { useBranding } from '../BrandingContext';
 import { 
   Search, 
   ArrowDownCircle,
@@ -15,6 +16,7 @@ import {
 } from 'lucide-react';
 
 export function AMOrders() {
+  const { branding } = useBranding();
   const [searchQuery, setSearchQuery] = useState('');
 
   const orders = [
@@ -258,7 +260,7 @@ export function AMOrders() {
                 <div className="flex gap-2 pt-2">
                   <Button variant="outline" size="sm">View Details</Button>
                   {order.status === 'nigo' && (
-                    <Button size="sm">Remediate</Button>
+                    <Button size="sm" style={{ backgroundColor: branding.primaryColor }}>Remediate</Button>
                   )}
                   {order.status === 'allocated' && (
                     <Button variant="outline" size="sm">Generate Confirmation</Button>

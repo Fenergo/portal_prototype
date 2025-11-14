@@ -145,7 +145,11 @@ export function InvestorHome({ onNavigate }: InvestorHomeProps) {
                 </div>
 
                 <div className="flex gap-2">
-                  <Button size="sm" onClick={() => onNavigate('trades')}>
+                  <Button 
+                    size="sm" 
+                    onClick={() => onNavigate('trades')}
+                    style={{ backgroundColor: branding.primaryColor }}
+                  >
                     Place Order
                   </Button>
                   <Button size="sm" variant="outline">

@@ -5,6 +5,7 @@ import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Badge } from '../ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import { useBranding } from '../BrandingContext';
 import { 
   User,
   FileText,
@@ -17,6 +18,7 @@ import {
 } from 'lucide-react';
 
 export function AccountMaintenance() {
+  const { branding } = useBranding();
   const [activeTab, setActiveTab] = useState('profile');
 
   const kycDocuments = [
@@ -204,7 +206,7 @@ export function AccountMaintenance() {
               </Card>
 
               <div className="flex gap-2">
-                <Button>Request Address Change</Button>
+                <Button style={{ backgroundColor: branding.primaryColor }}>Request Address Change</Button>
                 <Button variant="outline">Update Contact Details</Button>
               </div>
             </div>
@@ -223,7 +225,7 @@ export function AccountMaintenance() {
                   <Input id="phone" type="tel" defaultValue="+1 (555) 123-4567" />
                 </div>
               </div>
-              <Button>Save Changes</Button>
+              <Button style={{ backgroundColor: branding.primaryColor }}>Save Changes</Button>
             </div>
           </Card>
         </TabsContent>
@@ -234,7 +236,7 @@ export function AccountMaintenance() {
             <div className="text-slate-600">
               {kycDocuments.length} documents on file
             </div>
-            <Button>
+            <Button style={{ backgroundColor: branding.primaryColor }}>
               <Upload className="size-4 mr-2" />
               Upload New Document
             </Button>
@@ -375,7 +377,7 @@ export function AccountMaintenance() {
             <div className="text-slate-600">
               Manage authorized signatories for your account
             </div>
-            <Button>
+            <Button style={{ backgroundColor: branding.primaryColor }}>
               <Users className="size-4 mr-2" />
               Add Signatory
             </Button>

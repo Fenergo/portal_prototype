@@ -66,7 +66,7 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
       <aside className="w-64 bg-white border-r flex flex-col">
         <div className="p-4 border-b">
           <div>
-            <div className="text-slate-900 font-bold">FundFlow</div>
+            <div className="text-slate-900 font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>FundFlow</div>
             <div className="text-slate-500 text-xs">Investor Portal</div>
           </div>
         </div>
@@ -114,7 +114,7 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
               alt="Fenergo"
               className="h-8 object-contain"
             />
-            <span className="text-slate-900 font-bold">FundFlow</span>
+            <span className="text-slate-900 font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>FundFlow</span>
           </div>
           <div className="h-8 flex items-center">
             <img 

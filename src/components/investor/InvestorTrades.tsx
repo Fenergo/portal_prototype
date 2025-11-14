@@ -1,6 +1,7 @@
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
+import { useBranding } from '../BrandingContext';
 import { 
   ArrowDownCircle, 
   ArrowUpCircle, 
@@ -10,6 +11,7 @@ import {
 } from 'lucide-react';
 
 export function InvestorTrades() {
+  const { branding } = useBranding();
   const orders = [
     {
       id: 'ORD-2025-001234',
@@ -82,7 +84,7 @@ export function InvestorTrades() {
           <h1 className="text-slate-900">Trade Orders</h1>
           <p className="text-slate-600">View your order history and status</p>
         </div>
-        <Button>Place New Order</Button>
+        <Button style={{ backgroundColor: branding.primaryColor }}>Place New Order</Button>
       </div>
 
       {/* Info Card */}

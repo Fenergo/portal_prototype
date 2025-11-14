@@ -22,7 +22,7 @@ export function LandingPage({ onLogin }: LandingPageProps) {
               alt="Fenergo" 
               className="h-8"
             />
-            <span className="text-slate-900 font-bold">FundFlow</span>
+            <span className="text-slate-900 font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>FundFlow</span>
           </div>
           <div className="flex items-center gap-4">
             {branding.logoUrl && (

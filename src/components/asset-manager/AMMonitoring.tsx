@@ -1,6 +1,7 @@
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
+import { useBranding } from '../BrandingContext';
 import { 
   Shield,
   AlertTriangle,
@@ -12,6 +13,7 @@ import {
 } from 'lucide-react';
 
 export function AMMonitoring() {
+  const { branding } = useBranding();
   const alerts = [
     {
       id: 'ALERT-8912',
@@ -194,7 +196,7 @@ export function AMMonitoring() {
                 <div className="flex gap-2">
                   {alert.status === 'open' && (
                     <>
-                      <Button size="sm">Investigate</Button>
+                      <Button size="sm" style={{ backgroundColor: branding.primaryColor }}>Investigate</Button>
                       <Button variant="outline" size="sm">Assign</Button>
                     </>
                   )}
@@ -211,7 +213,7 @@ export function AMMonitoring() {
                     </>
                   )}
                   {alert.status === 'escalated' && (
-                    <Button size="sm">
+                    <Button size="sm" style={{ backgroundColor: branding.primaryColor }}>
                       <FileText className="size-4 mr-2" />
                       Prepare SAR/STR
                     </Button>

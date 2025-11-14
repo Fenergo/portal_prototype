@@ -3,6 +3,7 @@ import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Input } from '../ui/input';
+import { useBranding } from '../BrandingContext';
 import { 
   Search, 
   TrendingUp, 
@@ -17,6 +18,7 @@ import { AccountOnboarding } from './AccountOnboarding';
 import { OrderWizard } from './OrderWizard';
 
 export function InvestorInvest() {
+  const { branding } = useBranding();
   const [searchQuery, setSearchQuery] = useState('');
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showOrderWizard, setShowOrderWizard] = useState(false);
@@ -179,6 +181,7 @@ export function InvestorInvest() {
                   <Button 
                     disabled={!fund.eligible}
                     onClick={() => setShowOrderWizard(true)}
+                    style={{ backgroundColor: branding.primaryColor }}
                   >
                     Invest Now
                     <ArrowRight className="size-4 ml-2" />
