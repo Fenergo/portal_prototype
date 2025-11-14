@@ -19,7 +19,7 @@ interface AMOverviewProps {
 
 export function AMOverview({ onNavigate }: AMOverviewProps) {
   const metrics = [
-    { label: 'Total AUM', value: '$2.4B', change: '+4.2%', trend: 'up' as const, icon: DollarSign, customIcon: '/portal_prototype/aum_logo.png' },
+    { label: 'Total AUM', value: '$2.4B', change: '+4.2%', trend: 'up' as const, icon: DollarSign },
     { label: 'Active Investors', value: '1,247', change: '+23', trend: 'up' as const, icon: Users },
     { label: 'Orders Today', value: '34', change: '-', trend: 'neutral' as const, icon: ShoppingCart },
     { label: 'STP Rate', value: '96.4%', change: '+1.2%', trend: 'up' as const, icon: Activity },
@@ -112,11 +112,7 @@ export function AMOverview({ onNavigate }: AMOverviewProps) {
             <Card key={metric.label} className="p-6">
               <div className="flex items-start justify-between mb-2">
                 <div className="text-slate-600">{metric.label}</div>
-                {metric.customIcon ? (
-                  <img src={metric.customIcon} alt={metric.label} className="size-5" />
-                ) : (
-                  <Icon className="size-5 text-slate-400" />
-                )}
+                <Icon className="size-5 text-slate-400" />
               </div>
               <div className="space-y-1">
                 <div className="text-slate-900">{metric.value}</div>
