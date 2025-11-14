@@ -12,9 +12,22 @@ export function LandingPage({ onLogin }: LandingPageProps) {
   const { branding } = useBranding();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 relative">
+      {/* Watermark */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-96 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/portal_prototype/aztec_group_cover.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'bottom center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.1,
+          zIndex: 0
+        }}
+      />
+      
       {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm">
+      <header className="border-b bg-white/80 backdrop-blur-sm relative z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img 
@@ -49,7 +62,7 @@ export function LandingPage({ onLogin }: LandingPageProps) {
       </header>
 
       {/* Hero */}
-      <section className="container mx-auto px-4 py-16 md:py-24">
+      <section className="container mx-auto px-4 py-16 md:py-24 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-slate-900">
             Institutional-Grade Fund Management Platform
@@ -84,7 +97,7 @@ export function LandingPage({ onLogin }: LandingPageProps) {
       </section>
 
       {/* Features */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="container mx-auto px-4 py-16 relative z-10">
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           <Card className="p-6 space-y-4 bg-white/60 backdrop-blur">
             <div className="size-12 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -122,7 +135,7 @@ export function LandingPage({ onLogin }: LandingPageProps) {
       </section>
 
       {/* Footer */}
-      <footer className="border-t bg-white/80 backdrop-blur-sm mt-16">
+      <footer className="border-t bg-white/80 backdrop-blur-sm mt-16 relative z-10">
         <div className="container mx-auto px-4 py-8 text-center text-slate-500">
           <p>© 2025 Fenergo FundFlow. Prototype demonstrating institutional fund management capabilities.</p>
         </div>
