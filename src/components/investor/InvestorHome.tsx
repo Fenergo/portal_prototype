@@ -1,6 +1,7 @@
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
+import { useBranding } from '../BrandingContext';
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -16,6 +17,7 @@ interface InvestorHomeProps {
 }
 
 export function InvestorHome({ onNavigate }: InvestorHomeProps) {
+  const { branding } = useBranding();
   const portfolios = [
     {
       id: '1',
@@ -83,17 +85,22 @@ export function InvestorHome({ onNavigate }: InvestorHomeProps) {
       </div>
 
       {/* Total Value Summary */}
-      <Card className="p-6 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+      <Card 
+        className="p-6 text-white"
+        style={{ 
+          background: `linear-gradient(to bottom right, ${branding.primaryColor}, ${branding.primaryColor}dd)` 
+        }}
+      >
         <div className="space-y-2">
-          <div className="text-blue-100">Total Portfolio Value</div>
+          <div className="text-white/80">Total Portfolio Value</div>
           <div className="flex items-baseline gap-3">
             <span className="text-white">$372,850.32</span>
-            <span className="text-blue-100 flex items-center gap-1">
+            <span className="text-white/80 flex items-center gap-1">
               <TrendingUp className="size-4" />
               +$2,834.68 (0.77%)
             </span>
           </div>
-          <div className="text-blue-100">As of November 11, 2025</div>
+          <div className="text-white/80">As of November 11, 2025</div>
         </div>
       </Card>
 

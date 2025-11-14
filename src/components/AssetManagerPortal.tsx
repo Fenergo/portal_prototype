@@ -66,11 +66,14 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
   return (
     <div className="flex h-screen bg-slate-50">
       {/* Sidebar */}
-      <aside className="w-64 bg-slate-900 text-white flex flex-col">
-        <div className="p-4 border-b border-slate-800">
+      <aside 
+        className="w-64 text-white flex flex-col"
+        style={{ backgroundColor: branding.primaryColor }}
+      >
+        <div className="p-4 border-b border-white/20">
           <div>
-            <div className="text-white font-semibold">FundFlow</div>
-            <div className="text-slate-400 text-xs">Asset Manager</div>
+            <div className="text-white font-bold">FundFlow</div>
+            <div className="text-white/70 text-xs">Asset Manager</div>
           </div>
         </div>
 
@@ -84,8 +87,8 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
                 onClick={() => setCurrentView(item.id)}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
                   isActive
-                    ? 'bg-blue-600 text-white'
-                    : 'text-slate-300 hover:bg-slate-800'
+                    ? 'bg-white/20 text-white'
+                    : 'text-white/70 hover:bg-white/10 hover:text-white'
                 }`}
               >
                 <Icon className="size-5" />
@@ -95,10 +98,10 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
           })}
         </nav>
 
-        <div className="p-4 border-t border-slate-800">
+        <div className="p-4 border-t border-white/20">
           <Button
             variant="ghost"
-            className="w-full justify-start gap-3 text-slate-300 hover:text-white hover:bg-slate-800"
+            className="w-full justify-start gap-3 text-white/70 hover:text-white hover:bg-white/10"
             onClick={onLogout}
           >
             <LogOut className="size-5" />
@@ -116,7 +119,7 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
               alt="Fenergo"
               className="h-8 object-contain"
             />
-            <span className="text-slate-900 font-semibold">FundFlow</span>
+            <span className="text-slate-900 font-bold">FundFlow</span>
           </div>
           <div className="h-8 flex items-center">
             <img 
