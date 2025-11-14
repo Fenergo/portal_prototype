@@ -73,7 +73,7 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
         <div className="p-4 border-b border-white/20">
           <div>
             <div className="text-white font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>FundFlow</div>
-            <div className="text-white/70 text-xs">Asset Manager</div>
+            <div className="text-white/70 text-xs" style={{ fontFamily: 'Poppins, sans-serif' }}>Asset Manager Workbench</div>
           </div>
         </div>
 
