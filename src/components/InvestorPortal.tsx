@@ -67,7 +67,7 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
         <div className="p-4 border-b">
           <div>
             <div className="text-slate-900 font-bold" style={{ fontFamily: 'Poppins, sans-serif', fontSize: '20px' }}>fundflow</div>
-            <div className="text-slate-500 text-xs" style={{ fontFamily: 'Poppins, sans-serif' }}>Investor Portal</div>
+            <div className="text-slate-500 text-xs font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>Investor Portal</div>
           </div>
         </div>
 
