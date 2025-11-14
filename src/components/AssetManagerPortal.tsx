@@ -90,6 +90,9 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
                     ? 'bg-white/20 text-white'
                     : 'text-white/70 hover:text-white'
                 }`}
+                style={{
+                  backgroundColor: isActive ? 'rgba(255, 255, 255, 0.2)' : 'transparent'
+                }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
                     e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
