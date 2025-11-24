@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Progress } from '../ui/progress';
 import { useBranding } from '../BrandingContext';
+import { FundLaunchWizard } from './FundLaunchWizard';
 import { 
   Rocket,
   Users,
@@ -15,6 +17,7 @@ import {
 
 export function AMFundLaunches() {
   const { branding } = useBranding();
+  const [showLaunchWizard, setShowLaunchWizard] = useState(false);
   const launches = [
     {
       id: 'LAUNCH-001',
@@ -69,7 +72,7 @@ export function AMFundLaunches() {
           <h1 className="text-slate-900">Fund Launches</h1>
           <p className="text-slate-600">Manage fund launch campaigns and track invitation metrics</p>
         </div>
-        <Button className="gap-2" style={{ backgroundColor: branding.primaryColor }}>
+        <Button className="gap-2" style={{ backgroundColor: branding.primaryColor }} onClick={() => setShowLaunchWizard(true)}>
           <Plus className="size-4" />
           Create New Launch
         </Button>
@@ -254,6 +257,17 @@ export function AMFundLaunches() {
           </div>
         </div>
       </Card>
+
+      {/* Launch Wizard Modal */}
+      {showLaunchWizard && (
+        <FundLaunchWizard
+          onComplete={() => {
+            setShowLaunchWizard(false);
+            // Handle launch creation
+          }}
+          onCancel={() => setShowLaunchWizard(false)}
+        />
+      )}
     </div>
   );
 }
