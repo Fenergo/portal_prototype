@@ -30,6 +30,8 @@ export function AdminBranding() {
   const availableWatermarks = [
     { id: 'none', name: 'No Watermark', url: '' },
     { id: 'aztec', name: 'Aztec Group', url: '/portal_prototype/aztec_group_cover.jpg' },
+    { id: 'blk', name: 'BLK Watermark', url: '/portal_prototype/blk_watermark.jpg' },
+    { id: 'fenergo', name: 'Fenergo Watermark', url: '/portal_prototype/fenergo_watermark.jpg' },
   ];
 
   const fenergoColors = [
