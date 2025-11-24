@@ -124,10 +124,11 @@ export function InvestorInvest() {
   }
 
   return (
-    <div className="p-8 max-w-7xl mx-auto space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-slate-900">Browse Funds</h1>
+    <>
+      <div className="p-8 max-w-7xl mx-auto space-y-6">
+        {/* Header */}
+        <div>
+          <h1 className="text-slate-900">Browse Funds</h1>
         <p className="text-slate-600">Explore eligible investment opportunities</p>
       </div>
 
@@ -268,6 +269,7 @@ export function InvestorInvest() {
           </div>
         </div>
       </Card>
+      </div>
 
       {/* Prospectus Modal */}
       {showProspectus && (
@@ -306,6 +308,6 @@ export function InvestorInvest() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
