@@ -4,6 +4,11 @@ interface BrandingConfig {
   primaryColor: string;
   logoUrl: string;
   companyName: string;
+  watermark?: {
+    imageUrl: string;
+    opacity: number;
+    position: 'center' | 'bottom' | 'left' | 'right';
+  };
 }
 
 interface BrandingContextType {
@@ -15,6 +20,11 @@ const defaultBranding: BrandingConfig = {
   primaryColor: '#21CFB2',
   logoUrl: 'fenergo',
   companyName: 'Fenergo',
+  watermark: {
+    imageUrl: '',
+    opacity: 0.1,
+    position: 'bottom',
+  },
 };
 
 const BrandingContext = createContext<BrandingContextType | undefined>(undefined);

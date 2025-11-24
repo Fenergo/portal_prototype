@@ -19,11 +19,17 @@ export function AdminBranding() {
   const [tempColor, setTempColor] = useState(branding.primaryColor);
   const [tempCompanyName, setTempCompanyName] = useState(branding.companyName);
   const [showLogoSelector, setShowLogoSelector] = useState(false);
+  const [showWatermarkSelector, setShowWatermarkSelector] = useState(false);
 
   const availableLogos = [
     { id: 'fenergo', name: 'Fenergo Logo', url: '/portal_prototype/fen_logo.jpg' },
     { id: 'br', name: 'BR Logo', url: '/portal_prototype/BR_logo.png' },
     { id: 'azg', name: 'AzG Logo', url: '/portal_prototype/AzG_logo.png' },
+  ];
+
+  const availableWatermarks = [
+    { id: 'none', name: 'No Watermark', url: '' },
+    { id: 'aztec', name: 'Aztec Group', url: '/portal_prototype/aztec_group_cover.jpg' },
   ];
 
   const fenergoColors = [
@@ -176,6 +182,117 @@ export function AdminBranding() {
                   placeholder="Enter company name"
                 />
               </div>
+            </div>
+          </Card>
+
+          {/* Watermark Configuration */}
+          <Card className="p-6">
+            <h3 className="text-slate-900 mb-4">Landing Page Watermark</h3>
+            
+            <div className="space-y-4">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <p className="text-slate-900 mb-1">Current Watermark</p>
+                    <p className="text-slate-500 text-sm">
+                      {branding.watermark?.imageUrl ? 'Watermark active' : 'No watermark'}
+                    </p>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => setShowWatermarkSelector(!showWatermarkSelector)}
+                  >
+                    <Upload className="size-4 mr-2" />
+                    Select Image
+                  </Button>
+                </div>
+
+                {showWatermarkSelector && (
+                  <div className="grid grid-cols-2 gap-4 p-4 border rounded-lg bg-white mb-4">
+                    {availableWatermarks.map((watermark) => (
+                      <button
+                        key={watermark.id}
+                        onClick={() => updateBranding({
+                          watermark: {
+                            ...branding.watermark!,
+                            imageUrl: watermark.url,
+                          }
+                        })}
+                        className={`p-4 border-2 rounded-lg hover:bg-slate-50 transition-all ${
+                          branding.watermark?.imageUrl === watermark.url
+                            ? 'border-blue-500 bg-blue-50'
+                            : 'border-slate-200'
+                        }`}
+                      >
+                        {watermark.url ? (
+                          <div className="h-16 flex items-center justify-center mb-2 bg-slate-100 rounded overflow-hidden">
+                            <img 
+                              src={watermark.url} 
+                              alt={watermark.name}
+                              className="max-h-16 object-cover opacity-30"
+                            />
+                          </div>
+                        ) : (
+                          <div className="h-16 flex items-center justify-center mb-2 bg-slate-100 rounded">
+                            <span className="text-slate-400 text-sm">None</span>
+                          </div>
+                        )}
+                        <p className="text-sm text-slate-900">{watermark.name}</p>
+                        {branding.watermark?.imageUrl === watermark.url && (
+                          <Badge className="mt-2 bg-blue-100 text-blue-700 text-xs">Selected</Badge>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {branding.watermark?.imageUrl && (
+                <>
+                  <div className="space-y-2">
+                    <Label htmlFor="opacity">Opacity: {Math.round((branding.watermark?.opacity || 0.1) * 100)}%</Label>
+                    <input
+                      id="opacity"
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={(branding.watermark?.opacity || 0.1) * 100}
+                      onChange={(e) => updateBranding({
+                        watermark: {
+                          ...branding.watermark!,
+                          opacity: parseInt(e.target.value) / 100,
+                        }
+                      })}
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Position</Label>
+                    <div className="grid grid-cols-4 gap-2">
+                      {(['center', 'bottom', 'left', 'right'] as const).map((position) => (
+                        <button
+                          key={position}
+                          onClick={() => updateBranding({
+                            watermark: {
+                              ...branding.watermark!,
+                              position,
+                            }
+                          })}
+                          className={`px-4 py-2 rounded-lg border-2 transition-all capitalize ${
+                            branding.watermark?.position === position
+                              ? 'border-blue-500 bg-blue-50 text-blue-700'
+                              : 'border-slate-200 hover:border-slate-300'
+                          }`}
+                        >
+                          {position}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </Card>
 

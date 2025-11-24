@@ -11,20 +11,70 @@ interface LandingPageProps {
 export function LandingPage({ onLogin }: LandingPageProps) {
   const { branding } = useBranding();
 
+  const getWatermarkStyle = () => {
+    if (!branding.watermark?.imageUrl) return {};
+    
+    const position = branding.watermark.position;
+    const baseStyle: React.CSSProperties = {
+      backgroundImage: `url(${branding.watermark.imageUrl})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      opacity: branding.watermark.opacity,
+      zIndex: 0,
+    };
+
+    switch (position) {
+      case 'center':
+        return {
+          ...baseStyle,
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '80%',
+          height: '80%',
+          backgroundPosition: 'center',
+        };
+      case 'bottom':
+        return {
+          ...baseStyle,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '50%',
+          backgroundPosition: 'bottom center',
+        };
+      case 'left':
+        return {
+          ...baseStyle,
+          top: 0,
+          left: 0,
+          bottom: 0,
+          width: '50%',
+          backgroundPosition: 'left center',
+        };
+      case 'right':
+        return {
+          ...baseStyle,
+          top: 0,
+          right: 0,
+          bottom: 0,
+          width: '50%',
+          backgroundPosition: 'right center',
+        };
+      default:
+        return baseStyle;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 relative">
       {/* Watermark */}
-      <div 
-        className="absolute bottom-0 left-0 right-0 h-96 pointer-events-none"
-        style={{
-          backgroundImage: 'url(/portal_prototype/aztec_group_cover.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'bottom center',
-          backgroundRepeat: 'no-repeat',
-          opacity: 0.1,
-          zIndex: 0
-        }}
-      />
+      {branding.watermark?.imageUrl && (
+        <div 
+          className="absolute pointer-events-none"
+          style={getWatermarkStyle()}
+        />
+      )}
       
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm relative z-10">
