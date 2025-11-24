@@ -65,18 +65,19 @@ export function AMFundLaunches() {
   };
 
   return (
-    <div className="p-8 max-w-7xl mx-auto space-y-6">
-      {/* Header */}
-      <div className="flex items-start justify-between">
-        <div>
-          <h1 className="text-slate-900">Fund Launches</h1>
-          <p className="text-slate-600">Manage fund launch campaigns and track invitation metrics</p>
+    <>
+      <div className="p-8 max-w-7xl mx-auto space-y-6">
+        {/* Header */}
+        <div className="flex items-start justify-between">
+          <div>
+            <h1 className="text-slate-900">Fund Launches</h1>
+            <p className="text-slate-600">Manage fund launch campaigns and track invitation metrics</p>
+          </div>
+          <Button className="gap-2" style={{ backgroundColor: branding.primaryColor }} onClick={() => setShowLaunchWizard(true)}>
+            <Plus className="size-4" />
+            Create New Launch
+          </Button>
         </div>
-        <Button className="gap-2" style={{ backgroundColor: branding.primaryColor }} onClick={() => setShowLaunchWizard(true)}>
-          <Plus className="size-4" />
-          Create New Launch
-        </Button>
-      </div>
 
       {/* Launches List */}
       <div className="space-y-6">
@@ -257,17 +258,18 @@ export function AMFundLaunches() {
           </div>
         </div>
       </Card>
-
-      {/* Launch Wizard Modal */}
-      {showLaunchWizard && (
-        <FundLaunchWizard
-          onComplete={() => {
-            setShowLaunchWizard(false);
-            // Handle launch creation
-          }}
-          onCancel={() => setShowLaunchWizard(false)}
-        />
-      )}
     </div>
+
+    {/* Launch Wizard Modal */}
+    {showLaunchWizard && (
+      <FundLaunchWizard
+        onComplete={() => {
+          setShowLaunchWizard(false);
+          // Handle launch creation
+        }}
+        onCancel={() => setShowLaunchWizard(false)}
+      />
+    )}
+  </>
   );
 }
