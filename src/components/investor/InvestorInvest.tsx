@@ -12,7 +12,8 @@ import {
   Globe,
   ArrowRight,
   Star,
-  Info
+  Info,
+  X
 } from 'lucide-react';
 import { AccountOnboarding } from './AccountOnboarding';
 import { OrderWizard } from './OrderWizard';
@@ -23,6 +24,8 @@ export function InvestorInvest() {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showOrderWizard, setShowOrderWizard] = useState(false);
   const [selectedFundForOrder, setSelectedFundForOrder] = useState<string>('');
+  const [showProspectus, setShowProspectus] = useState(false);
+  const [showFactSheet, setShowFactSheet] = useState(false);
 
   const funds = [
     {
@@ -233,11 +236,11 @@ export function InvestorInvest() {
 
               {/* Actions */}
               <div className="flex gap-2">
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" onClick={() => setShowProspectus(true)}>
                   <Info className="size-4 mr-2" />
                   View Prospectus
                 </Button>
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" onClick={() => setShowFactSheet(true)}>
                   View Fact Sheet
                 </Button>
                 <Button variant="ghost" size="sm">
@@ -265,6 +268,44 @@ export function InvestorInvest() {
           </div>
         </div>
       </Card>
+
+      {/* Prospectus Modal */}
+      {showProspectus && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowProspectus(false)}>
+          <div className="relative bg-white rounded-lg max-w-4xl max-h-[90vh] overflow-auto" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setShowProspectus(false)}
+              className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-lg hover:bg-slate-100 z-10"
+            >
+              <X className="size-6 text-slate-600" />
+            </button>
+            <img 
+              src="/portal_prototype/prospectus_sample.jpg" 
+              alt="Prospectus"
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Fund Fact Sheet Modal */}
+      {showFactSheet && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowFactSheet(false)}>
+          <div className="relative bg-white rounded-lg max-w-4xl max-h-[90vh] overflow-auto" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setShowFactSheet(false)}
+              className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-lg hover:bg-slate-100 z-10"
+            >
+              <X className="size-6 text-slate-600" />
+            </button>
+            <img 
+              src="/portal_prototype/fundfact_sample.jpg" 
+              alt="Fund Fact Sheet"
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
