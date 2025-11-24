@@ -333,12 +333,11 @@ export function FundLaunchWizard({ onComplete, onCancel }: FundLaunchWizardProps
   };
 
   return (
-    <>
-      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={onCancel}>
-        <div
-          className="relative bg-white rounded-lg max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col"
-          onClick={(e) => e.stopPropagation()}
-        >
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={onCancel}>
+      <div
+        className="relative bg-white rounded-lg max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
           {/* Header */}
           <div className="border-b p-6 flex items-start justify-between">
             <div className="flex-1">
@@ -387,6 +386,5 @@ export function FundLaunchWizard({ onComplete, onCancel }: FundLaunchWizardProps
           </div>
         </div>
       </div>
-    </>
   );
 }
