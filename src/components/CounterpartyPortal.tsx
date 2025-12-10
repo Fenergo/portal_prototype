@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { CounterpartyHome } from './counterparty/CounterpartyHome';
-import { CounterpartyInvest } from './counterparty/CounterpartyInvest';
+import { CounterpartyOnboarding } from './counterparty/CounterpartyOnboarding';
 import { CounterpartyTrades } from './counterparty/CounterpartyTrades';
 import { CounterpartyDocuments } from './counterparty/CounterpartyDocuments';
 import { CounterpartyMessages } from './counterparty/CounterpartyMessages';
@@ -23,7 +23,7 @@ interface CounterpartyPortalProps {
   onLogout: () => void;
 }
 
-type CounterpartyView = 'home' | 'invest' | 'trades' | 'documents' | 'requests' | 'messages' | 'settings';
+type CounterpartyView = 'home' | 'onboarding' | 'trades' | 'documents' | 'requests' | 'messages' | 'settings';
 
 export function CounterpartyPortal({ onLogout }: CounterpartyPortalProps) {
   const [currentView, setCurrentView] = useState<CounterpartyView>('home');
@@ -31,7 +31,7 @@ export function CounterpartyPortal({ onLogout }: CounterpartyPortalProps) {
 
   const navItems = [
     { id: 'home' as const, label: 'Home', icon: Home },
-    { id: 'invest' as const, label: 'Invest', icon: TrendingUp },
+    { id: 'onboarding' as const, label: 'Onboarding', icon: TrendingUp },
     { id: 'trades' as const, label: 'Trades', icon: ShoppingCart },
     { id: 'documents' as const, label: 'Documents', icon: FileText },
     { id: 'requests' as const, label: 'Requests', icon: ClipboardList },
@@ -43,8 +43,8 @@ export function CounterpartyPortal({ onLogout }: CounterpartyPortalProps) {
     switch (currentView) {
       case 'home':
         return <CounterpartyHome onNavigate={setCurrentView} />;
-      case 'invest':
-        return <CounterpartyInvest />;
+      case 'onboarding':
+        return <CounterpartyOnboarding />;
       case 'trades':
         return <CounterpartyTrades />;
       case 'documents':

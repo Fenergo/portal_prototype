@@ -110,8 +110,8 @@ export function CounterpartyHome({ onNavigate }: CounterpartyHomeProps) {
         <div className="lg:col-span-2 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-slate-900">Accounts & Portfolios</h2>
-            <Button variant="ghost" onClick={() => onNavigate('invest')}>
-              Browse Funds
+            <Button variant="ghost" onClick={() => onNavigate('onboarding')}>
+              View Invitations
               <ArrowRight className="size-4 ml-2" />
             </Button>
           </div>
