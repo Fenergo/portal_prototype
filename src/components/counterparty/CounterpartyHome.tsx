@@ -18,7 +18,10 @@ import {
   Globe,
   Leaf,
   Play,
-  Eye
+  Eye,
+  Info,
+  Download,
+  MessageSquare
 } from 'lucide-react';
 
 interface CounterpartyHomeProps {
@@ -102,47 +105,59 @@ export function CounterpartyHome({ onNavigate }: CounterpartyHomeProps) {
     {
       id: '1',
       title: 'Complete KYB documentation - BlackRock Onboarding',
+      description: 'Upload corporate documents and beneficial ownership details',
       type: 'action',
       priority: 'high',
       dueDate: '2025-12-15',
       category: 'onboarding',
+      assignee: 'Compliance Team',
     },
     {
       id: '2',
       title: 'Review agreement changes - State Street',
+      description: 'Review and approve revised distribution agreement',
       type: 'action',
       priority: 'high',
       dueDate: '2025-12-18',
       category: 'onboarding',
+      assignee: 'Legal Team',
     },
     {
       id: '3',
       title: 'Annual AML Policy Attestation - Global Equity Fund',
+      description: 'Review and attest to AML/CFT policy compliance',
       type: 'action',
       priority: 'medium',
       dueDate: '2026-01-15',
       category: 'compliance',
+      assignee: 'Risk Team',
     },
   ];
 
   const alerts = [
     {
       id: '1',
+      title: 'New Invitation',
       message: 'New invitation received from Aztec Group',
       time: '2 hours ago',
       category: 'onboarding',
+      type: 'warning' as const,
     },
     {
       id: '2',
+      title: 'Analytics Available',
       message: 'Sustainable Bond Fund - Q4 distribution analytics available',
       time: '4 hours ago',
       category: 'funds',
+      type: 'info' as const,
     },
     {
       id: '3',
+      title: 'Screening Complete',
       message: 'KYB screening completed for BlackRock onboarding',
       time: '1 day ago',
       category: 'onboarding',
+      type: 'info' as const,
     },
   ];
 

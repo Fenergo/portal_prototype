@@ -42,7 +42,7 @@ export function CounterpartyPortal({ onLogout }: CounterpartyPortalProps) {
   const renderView = () => {
     switch (currentView) {
       case 'home':
-        return <CounterpartyHome onNavigate={setCurrentView} />;
+        return <CounterpartyHome onNavigate={(view) => setCurrentView(view as CounterpartyView)} />;
       case 'onboarding':
         return <CounterpartyOnboarding />;
       case 'funds-library':
@@ -56,7 +56,7 @@ export function CounterpartyPortal({ onLogout }: CounterpartyPortalProps) {
       case 'settings':
         return <CounterpartySettings />;
       default:
-        return <CounterpartyHome onNavigate={setCurrentView} />;
+        return <CounterpartyHome onNavigate={(view) => setCurrentView(view as CounterpartyView)} />;
     }
   };
 
