@@ -135,6 +135,15 @@ export function LandingPage({ onLogin }: LandingPageProps) {
             </Button>
             <Button 
               size="lg" 
+              onClick={() => onLogin('counterparty')}
+              className="gap-2"
+              style={{ backgroundColor: branding.primaryColor }}
+            >
+              <User className="size-4" />
+              Counterparty Portal
+            </Button>
+            <Button 
+              size="lg" 
               variant="outline"
               onClick={() => onLogin('asset-manager')}
               className="gap-2"

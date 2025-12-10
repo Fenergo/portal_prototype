@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { LandingPage } from './components/LandingPage';
 import { InvestorPortal } from './components/InvestorPortal';
 import { AssetManagerPortal } from './components/AssetManagerPortal';
+import { CounterpartyPortal } from './components/CounterpartyPortal';
 import { BrandingProvider } from './components/BrandingContext';
 
-export type UserRole = 'investor' | 'asset-manager' | null;
+export type UserRole = 'investor' | 'asset-manager' | 'counterparty' | null;
 
 export default function App() {
   const [userRole, setUserRole] = useState<UserRole>(null);
@@ -26,6 +27,8 @@ export default function App() {
         <LandingPage onLogin={handleLogin} />
       ) : userRole === 'investor' ? (
         <InvestorPortal onLogout={handleLogout} />
+      ) : userRole === 'counterparty' ? (
+        <CounterpartyPortal onLogout={handleLogout} />
       ) : (
         <AssetManagerPortal onLogout={handleLogout} />
       )}
