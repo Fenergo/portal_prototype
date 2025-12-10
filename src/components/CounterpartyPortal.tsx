@@ -12,7 +12,7 @@ import {
 import { Button } from './ui/button';
 import { CounterpartyHome } from './counterparty/CounterpartyHome';
 import { CounterpartyOnboarding } from './counterparty/CounterpartyOnboarding';
-import { CounterpartyTrades } from './counterparty/CounterpartyTrades';
+import { CounterpartyFundsLibrary } from './counterparty/CounterpartyFundsLibrary';
 import { CounterpartyDocuments } from './counterparty/CounterpartyDocuments';
 import { CounterpartyMessages } from './counterparty/CounterpartyMessages';
 import { CounterpartySettings } from './counterparty/CounterpartySettings';
@@ -23,7 +23,7 @@ interface CounterpartyPortalProps {
   onLogout: () => void;
 }
 
-type CounterpartyView = 'home' | 'onboarding' | 'trades' | 'documents' | 'requests' | 'messages' | 'settings';
+type CounterpartyView = 'home' | 'onboarding' | 'funds-library' | 'documents' | 'requests' | 'messages' | 'settings';
 
 export function CounterpartyPortal({ onLogout }: CounterpartyPortalProps) {
   const [currentView, setCurrentView] = useState<CounterpartyView>('home');
@@ -32,7 +32,7 @@ export function CounterpartyPortal({ onLogout }: CounterpartyPortalProps) {
   const navItems = [
     { id: 'home' as const, label: 'Home', icon: Home },
     { id: 'onboarding' as const, label: 'Onboarding', icon: TrendingUp },
-    { id: 'trades' as const, label: 'Trades', icon: ShoppingCart },
+    { id: 'funds-library' as const, label: 'Funds Library', icon: ShoppingCart },
     { id: 'documents' as const, label: 'Documents', icon: FileText },
     { id: 'requests' as const, label: 'Requests', icon: ClipboardList },
     { id: 'messages' as const, label: 'Messages', icon: MessageSquare },
@@ -45,8 +45,8 @@ export function CounterpartyPortal({ onLogout }: CounterpartyPortalProps) {
         return <CounterpartyHome onNavigate={setCurrentView} />;
       case 'onboarding':
         return <CounterpartyOnboarding />;
-      case 'trades':
-        return <CounterpartyTrades />;
+      case 'funds-library':
+        return <CounterpartyFundsLibrary />;
       case 'documents':
         return <CounterpartyDocuments />;
       case 'requests':
