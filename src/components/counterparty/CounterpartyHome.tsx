@@ -378,7 +378,7 @@ export function CounterpartyHome({ onNavigate }: CounterpartyHomeProps) {
                         <h3 className="font-semibold text-slate-900">{fund.name}</h3>
                         <p className="text-sm text-slate-600">{fund.shareClass}</p>
                       </div>
-                      <img src={fund.amLogo} alt={fund.assetManager} className="h-6 object-contain" />
+                      <img src={fund.amLogo} alt={fund.assetManager} className="h-4 object-contain" />
                     </div>
                     <Button size="sm" variant="outline">
                       <Eye className="size-4" />
