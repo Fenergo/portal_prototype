@@ -144,11 +144,16 @@ export function InvestorHome({ onNavigate }: InvestorHomeProps) {
 
       {/* AI Assistant */}
       <AIAssistant 
-          portfolioData={portfolios}
-          tasksData={tasks}
-          tradesData={null}
-        />
+        portfolioData={portfolios}
+        tasksData={tasks}
+        tradesData={null}
+      />
 
+      {/* Portfolios & Tasks Grid */}
+      <div className="grid lg:grid-cols-3 gap-6">
+        {/* Portfolios */}
+        <div className="lg:col-span-2 space-y-4">
+          <div className="flex items-center justify-between">
             <h2 className="text-slate-900">Accounts & Portfolios</h2>
             <Button variant="ghost" onClick={() => onNavigate('invest')}>
               Browse Funds
