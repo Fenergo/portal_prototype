@@ -141,26 +141,26 @@ export function AIAssistant({ portfolioData, tasksData, tradesData }: AIAssistan
     <Card className="overflow-hidden shadow-lg">
       {/* Header */}
       <div 
-        className="p-6 cursor-pointer text-white"
+        className="p-4 cursor-pointer text-white"
         style={{
           background: `linear-gradient(to right, ${branding.primaryColor}, ${branding.primaryColor}dd)`
         }}
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
-              <Sparkles className="size-6 text-white" />
+          <div className="flex items-center gap-2">
+            <div className="bg-white/20 p-1.5 rounded-lg backdrop-blur-sm">
+              <Sparkles className="size-5 text-white" />
             </div>
             <div>
-              <h2 className="text-white flex items-center gap-2">
+              <h2 className="text-white flex items-center gap-2 text-base">
                 AI Assistant
-                <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
+                <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs">
                   Beta
                 </Badge>
               </h2>
-              <p className="text-white/90 text-sm">
-                Ask me anything about your account, trades, or tasks
+              <p className="text-white/90 text-xs">
+                Ask me anything about your account
               </p>
             </div>
           </div>
@@ -170,9 +170,9 @@ export function AIAssistant({ portfolioData, tasksData, tradesData }: AIAssistan
             className="text-white hover:bg-white/20"
           >
             {isExpanded ? (
-              <ChevronUp className="size-5" />
+              <ChevronUp className="size-4" />
             ) : (
-              <ChevronDown className="size-5" />
+              <ChevronDown className="size-4" />
             )}
           </Button>
         </div>
@@ -180,14 +180,14 @@ export function AIAssistant({ portfolioData, tasksData, tradesData }: AIAssistan
 
       {/* Suggested Queries - Always Visible */}
       {!isExpanded && (
-        <div className="p-6 bg-white">
-          <p className="text-slate-600 mb-3">Quick queries:</p>
-          <div className="grid sm:grid-cols-2 gap-2">
+        <div className="p-4 bg-white">
+          <p className="text-slate-600 text-xs mb-2">Quick queries:</p>
+          <div className="grid grid-cols-2 gap-2">
             {suggestedQueries.map((suggestion, index) => (
               <Button
                 key={index}
                 variant="outline"
-                className="justify-start text-left h-auto py-3 transition-colors"
+                className="justify-start text-left h-auto py-2 px-2 transition-colors text-xs"
                 style={{
                   borderColor: `${branding.primaryColor}30`
                 }}
@@ -201,11 +201,11 @@ export function AIAssistant({ portfolioData, tasksData, tradesData }: AIAssistan
                 }}
                 onClick={() => handleSuggestedQuery(suggestion.text)}
               >
-                <div className="flex items-center gap-2 text-slate-700">
+                <div className="flex items-center gap-1.5 text-slate-700">
                   <div style={{ color: branding.primaryColor }}>
                     {suggestion.icon}
                   </div>
-                  <span className="text-sm">{suggestion.text}</span>
+                  <span className="text-xs leading-tight">{suggestion.text}</span>
                 </div>
               </Button>
             ))}

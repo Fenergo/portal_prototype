@@ -10,7 +10,8 @@ import {
   CheckCircle2,
   ArrowRight,
   DollarSign,
-  Percent
+  Percent,
+  Building2
 } from 'lucide-react';
 
 interface InvestorHomeProps {
@@ -85,8 +86,9 @@ export function InvestorHome({ onNavigate }: InvestorHomeProps) {
         <p className="text-slate-600">Here's your portfolio overview</p>
       </div>
 
-      {/* Total Value Summary */}
-      <div className="grid lg:grid-cols-2 gap-6">
+      {/* Stats Summary */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Total Portfolio Value */}
         <Card 
           className="p-6 text-white"
           style={{ 
@@ -94,31 +96,59 @@ export function InvestorHome({ onNavigate }: InvestorHomeProps) {
           }}
         >
           <div className="space-y-2">
-            <div className="text-white/80">Total Portfolio Value</div>
-            <div className="flex items-baseline gap-3">
-              <span className="text-white">$372,850.32</span>
-              <span className="text-white/80 flex items-center gap-1">
-                <TrendingUp className="size-4" />
-                +$2,834.68 (0.77%)
-              </span>
+            <div className="text-white/80 text-sm">Total Portfolio Value</div>
+            <div className="text-2xl font-bold text-white">$372,850.32</div>
+            <div className="text-white/80 flex items-center gap-1 text-sm">
+              <TrendingUp className="size-4" />
+              +$2,834.68 (0.77%)
             </div>
-            <div className="text-white/80">As of November 11, 2025</div>
           </div>
         </Card>
 
-        {/* AI Assistant */}
-        <AIAssistant 
+        {/* YTD Return */}
+        <Card className="p-6">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-slate-600 text-sm">
+              <DollarSign className="size-4" />
+              <span>YTD Return</span>
+            </div>
+            <div className="text-2xl font-bold text-green-600">+8.4%</div>
+            <div className="text-slate-500 text-sm">Year to date performance</div>
+          </div>
+        </Card>
+
+        {/* Total Fees */}
+        <Card className="p-6">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-slate-600 text-sm">
+              <Percent className="size-4" />
+              <span>Total Fees</span>
+            </div>
+            <div className="text-2xl font-bold text-slate-900">0.68%</div>
+            <div className="text-slate-500 text-sm">Annual fee structure</div>
+          </div>
+        </Card>
+
+        {/* Number of Funds */}
+        <Card className="p-6">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-slate-600 text-sm">
+              <Building2 className="size-4" />
+              <span>Active Funds</span>
+            </div>
+            <div className="text-2xl font-bold text-slate-900">{portfolios.length}</div>
+            <div className="text-slate-500 text-sm">Investment accounts</div>
+          </div>
+        </Card>
+      </div>
+
+      {/* AI Assistant */}
+      <AIAssistant 
           portfolioData={portfolios}
           tasksData={tasks}
           tradesData={null}
         />
-      </div>
 
-      {/* Portfolios & Tasks Grid */}
-      <div className="grid lg:grid-cols-3 gap-6">
-        {/* Portfolios */}
-        <div className="lg:col-span-2 space-y-4">
-          <div className="flex items-center justify-between">
             <h2 className="text-slate-900">Accounts & Portfolios</h2>
             <Button variant="ghost" onClick={() => onNavigate('invest')}>
               Browse Funds
