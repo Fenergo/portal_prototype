@@ -3,6 +3,7 @@ import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Badge } from '../ui/badge';
+import { useBranding } from '../BrandingContext';
 import { 
   Sparkles, 
   Send, 
@@ -28,6 +29,7 @@ interface AIAssistantProps {
 }
 
 export function AIAssistant({ portfolioData, tasksData, tradesData }: AIAssistantProps) {
+  const { branding } = useBranding();
   const [isExpanded, setIsExpanded] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
@@ -136,10 +138,13 @@ export function AIAssistant({ portfolioData, tasksData, tradesData }: AIAssistan
   };
 
   return (
-    <Card className="overflow-hidden border-2 border-[#21CFB2]/20 shadow-lg">
+    <Card className="overflow-hidden shadow-lg">
       {/* Header */}
       <div 
-        className="bg-gradient-to-r from-[#21CFB2] to-[#56DBC4] p-6 cursor-pointer"
+        className="p-6 cursor-pointer text-white"
+        style={{
+          background: `linear-gradient(to right, ${branding.primaryColor}, ${branding.primaryColor}dd)`
+        }}
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex items-center justify-between">
@@ -175,18 +180,29 @@ export function AIAssistant({ portfolioData, tasksData, tradesData }: AIAssistan
 
       {/* Suggested Queries - Always Visible */}
       {!isExpanded && (
-        <div className="p-6 bg-gradient-to-b from-slate-50 to-white">
+        <div className="p-6 bg-white">
           <p className="text-slate-600 mb-3">Quick queries:</p>
           <div className="grid sm:grid-cols-2 gap-2">
             {suggestedQueries.map((suggestion, index) => (
               <Button
                 key={index}
                 variant="outline"
-                className="justify-start text-left h-auto py-3 hover:bg-[#21CFB2]/5 hover:border-[#21CFB2]/30 transition-colors"
+                className="justify-start text-left h-auto py-3 transition-colors"
+                style={{
+                  borderColor: `${branding.primaryColor}30`
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = `${branding.primaryColor}10`;
+                  e.currentTarget.style.borderColor = `${branding.primaryColor}50`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.borderColor = `${branding.primaryColor}30`;
+                }}
                 onClick={() => handleSuggestedQuery(suggestion.text)}
               >
                 <div className="flex items-center gap-2 text-slate-700">
-                  <div className="text-[#21CFB2]">
+                  <div style={{ color: branding.primaryColor }}>
                     {suggestion.icon}
                   </div>
                   <span className="text-sm">{suggestion.text}</span>
@@ -201,11 +217,14 @@ export function AIAssistant({ portfolioData, tasksData, tradesData }: AIAssistan
       {isExpanded && (
         <div className="flex flex-col">
           {/* Messages Area */}
-          <div className="p-6 space-y-4 max-h-96 overflow-y-auto bg-gradient-to-b from-slate-50 to-white">
+          <div className="p-6 space-y-4 max-h-96 overflow-y-auto bg-slate-50">
             {messages.length === 0 ? (
               <div className="text-center py-8 space-y-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#21CFB2]/10">
-                  <Sparkles className="size-8 text-[#21CFB2]" />
+                <div 
+                  className="inline-flex items-center justify-center w-16 h-16 rounded-full"
+                  style={{ backgroundColor: `${branding.primaryColor}20` }}
+                >
+                  <Sparkles className="size-8" style={{ color: branding.primaryColor }} />
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-slate-900">How can I help you today?</h3>
@@ -218,11 +237,22 @@ export function AIAssistant({ portfolioData, tasksData, tradesData }: AIAssistan
                     <Button
                       key={index}
                       variant="outline"
-                      className="justify-start text-left h-auto py-3 hover:bg-[#21CFB2]/5 hover:border-[#21CFB2]/30"
+                      className="justify-start text-left h-auto py-3"
+                      style={{
+                        borderColor: `${branding.primaryColor}30`
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = `${branding.primaryColor}10`;
+                        e.currentTarget.style.borderColor = `${branding.primaryColor}50`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.borderColor = `${branding.primaryColor}30`;
+                      }}
                       onClick={() => handleSuggestedQuery(suggestion.text)}
                     >
                       <div className="flex items-center gap-2 text-slate-700">
-                        <div className="text-[#21CFB2]">
+                        <div style={{ color: branding.primaryColor }}>
                           {suggestion.icon}
                         </div>
                         <span className="text-sm">{suggestion.text}</span>
@@ -241,14 +271,15 @@ export function AIAssistant({ portfolioData, tasksData, tradesData }: AIAssistan
                     <div
                       className={`max-w-[80%] rounded-lg p-4 ${
                         message.type === 'user'
-                          ? 'bg-[#21CFB2] text-white'
+                          ? 'text-white'
                           : 'bg-white border border-slate-200 text-slate-900'
                       }`}
+                      style={message.type === 'user' ? { backgroundColor: branding.primaryColor } : undefined}
                     >
                       {message.type === 'assistant' && (
                         <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-200">
-                          <Sparkles className="size-4 text-[#21CFB2]" />
-                          <span className="text-sm text-[#21CFB2]">AI Assistant</span>
+                          <Sparkles className="size-4" style={{ color: branding.primaryColor }} />
+                          <span className="text-sm" style={{ color: branding.primaryColor }}>AI Assistant</span>
                         </div>
                       )}
                       <div className="whitespace-pre-line">{message.content}</div>
@@ -267,7 +298,7 @@ export function AIAssistant({ portfolioData, tasksData, tradesData }: AIAssistan
                   <div className="flex justify-start">
                     <div className="bg-white border border-slate-200 rounded-lg p-4">
                       <div className="flex items-center gap-2 text-slate-600">
-                        <Sparkles className="size-4 text-[#21CFB2] animate-pulse" />
+                        <Sparkles className="size-4 animate-pulse" style={{ color: branding.primaryColor }} />
                         <span className="text-sm">AI is thinking...</span>
                       </div>
                     </div>
@@ -291,7 +322,18 @@ export function AIAssistant({ portfolioData, tasksData, tradesData }: AIAssistan
               <Button
                 onClick={() => handleSubmit()}
                 disabled={!inputValue.trim() || isProcessing}
-                className="bg-[#21CFB2] hover:bg-[#3CD5BB] text-white"
+                className="text-white"
+                style={{ backgroundColor: branding.primaryColor }}
+                onMouseEnter={(e) => {
+                  if (!e.currentTarget.disabled) {
+                    e.currentTarget.style.backgroundColor = `${branding.primaryColor}dd`;
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!e.currentTarget.disabled) {
+                    e.currentTarget.style.backgroundColor = branding.primaryColor;
+                  }
+                }}
               >
                 <Send className="size-4" />
               </Button>
