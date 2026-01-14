@@ -2,6 +2,7 @@ import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { useBranding } from '../BrandingContext';
+import { AIAssistant } from './AIAssistant';
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -85,24 +86,33 @@ export function InvestorHome({ onNavigate }: InvestorHomeProps) {
       </div>
 
       {/* Total Value Summary */}
-      <Card 
-        className="p-6 text-white"
-        style={{ 
-          background: `linear-gradient(to bottom right, ${branding.primaryColor}, ${branding.primaryColor}dd)` 
-        }}
-      >
-        <div className="space-y-2">
-          <div className="text-white/80">Total Portfolio Value</div>
-          <div className="flex items-baseline gap-3">
-            <span className="text-white">$372,850.32</span>
-            <span className="text-white/80 flex items-center gap-1">
-              <TrendingUp className="size-4" />
-              +$2,834.68 (0.77%)
-            </span>
+      <div className="grid lg:grid-cols-2 gap-6">
+        <Card 
+          className="p-6 text-white"
+          style={{ 
+            background: `linear-gradient(to bottom right, ${branding.primaryColor}, ${branding.primaryColor}dd)` 
+          }}
+        >
+          <div className="space-y-2">
+            <div className="text-white/80">Total Portfolio Value</div>
+            <div className="flex items-baseline gap-3">
+              <span className="text-white">$372,850.32</span>
+              <span className="text-white/80 flex items-center gap-1">
+                <TrendingUp className="size-4" />
+                +$2,834.68 (0.77%)
+              </span>
+            </div>
+            <div className="text-white/80">As of November 11, 2025</div>
           </div>
-          <div className="text-white/80">As of November 11, 2025</div>
-        </div>
-      </Card>
+        </Card>
+
+        {/* AI Assistant */}
+        <AIAssistant 
+          portfolioData={portfolios}
+          tasksData={tasks}
+          tradesData={null}
+        />
+      </div>
 
       {/* Portfolios & Tasks Grid */}
       <div className="grid lg:grid-cols-3 gap-6">
