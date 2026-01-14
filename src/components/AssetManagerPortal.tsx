@@ -138,7 +138,7 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
                 }}
                 title={isSidebarCollapsed ? item.label : ''}
               >
-                <Icon className="size-5" />
+                <Icon className={isSidebarCollapsed ? "size-6" : "size-5"} />
                 {!isSidebarCollapsed && <span>{item.label}</span>}
               </button>
             );
@@ -153,7 +153,7 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
             onClick={onLogout}
             title={isSidebarCollapsed ? 'Sign Out' : ''}
           >
-            <LogOut className="size-5" />
+            <LogOut className={isSidebarCollapsed ? "size-6" : "size-5"} />
             {!isSidebarCollapsed && 'Sign Out'}
           </Button>
         </div>
