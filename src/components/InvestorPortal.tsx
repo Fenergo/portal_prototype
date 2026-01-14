@@ -7,7 +7,11 @@ import {
   Settings, 
   LogOut,
   ShoppingCart,
-  ClipboardList
+  ClipboardList,
+  Menu,
+  ChevronLeft,
+  Pin,
+  X
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { InvestorHome } from './investor/InvestorHome';
@@ -27,6 +31,8 @@ type InvestorView = 'home' | 'invest' | 'trades' | 'documents' | 'requests' | 'm
 
 export function InvestorPortal({ onLogout }: InvestorPortalProps) {
   const [currentView, setCurrentView] = useState<InvestorView>('home');
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarPinned, setIsSidebarPinned] = useState(true);
   const { branding } = useBranding();
 
   const navItems = [
@@ -63,12 +69,35 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
   return (
     <div className="flex h-screen bg-slate-50">
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r flex flex-col">
-        <div className="p-4 border-b">
+      <aside 
+        className="bg-white border-r flex flex-col transition-all duration-300 ease-in-out relative"
+        style={{ 
+          width: isSidebarCollapsed && !isSidebarPinned ? '0px' : '256px',
+          marginLeft: isSidebarCollapsed && !isSidebarPinned ? '-256px' : '0px'
+        }}
+        onMouseEnter={() => {
+          if (!isSidebarPinned && isSidebarCollapsed) {
+            setIsSidebarCollapsed(false);
+          }
+        }}
+        onMouseLeave={() => {
+          if (!isSidebarPinned) {
+            setIsSidebarCollapsed(true);
+          }
+        }}
+      >
+        <div className="p-4 border-b flex items-center justify-between">
           <div>
             <div className="text-slate-900 font-bold" style={{ fontFamily: 'Poppins, sans-serif', fontSize: '20px' }}>fundflow</div>
             <div className="text-slate-500 text-xs font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>Investor Portal</div>
           </div>
+          <button
+            onClick={() => setIsSidebarPinned(!isSidebarPinned)}
+            className="text-slate-400 hover:text-slate-900 transition-colors p-1 rounded"
+            title={isSidebarPinned ? 'Unpin sidebar' : 'Pin sidebar'}
+          >
+            {isSidebarPinned ? <Pin className="size-4 fill-current" /> : <Pin className="size-4" />}
+          </button>
         </div>
 
         <nav className="flex-1 p-4 space-y-1">
@@ -108,6 +137,22 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
       {/* Main Content */}
       <main className="flex-1 overflow-auto flex flex-col">
         <div className="border-b bg-white px-6 py-3 flex items-center justify-between">
+          {(!isSidebarPinned || isSidebarCollapsed) && (
+            <button
+              onClick={() => {
+                if (isSidebarPinned) {
+                  setIsSidebarCollapsed(!isSidebarCollapsed);
+                } else {
+                  setIsSidebarCollapsed(false);
+                  setIsSidebarPinned(true);
+                }
+              }}
+              className="text-slate-600 hover:text-slate-900 transition-colors p-1 rounded hover:bg-slate-100"
+              title="Toggle sidebar"
+            >
+              <Menu className="size-6" />
+            </button>
+          )}
           <div className="flex items-center gap-2">
             <span className="text-slate-600 text-sm" style={{ fontFamily: 'Poppins, sans-serif' }}>powered by</span>
             <img 
