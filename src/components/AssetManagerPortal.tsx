@@ -73,14 +73,13 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
     <div className="flex h-screen bg-slate-50">
       {/* Sidebar */}
       <aside 
-        className="text-white flex flex-col transition-all duration-300 ease-in-out relative"
+        className="text-white flex flex-col transition-all duration-300 ease-in-out relative overflow-hidden"
         style={{ 
           backgroundColor: branding.primaryColor,
-          width: isSidebarCollapsed && !isSidebarPinned ? '0px' : '256px',
-          marginLeft: isSidebarCollapsed && !isSidebarPinned ? '-256px' : '0px'
+          width: isSidebarCollapsed ? '64px' : '256px'
         }}
         onMouseEnter={() => {
-          if (!isSidebarPinned && isSidebarCollapsed) {
+          if (!isSidebarPinned) {
             setIsSidebarCollapsed(false);
           }
         }}
@@ -91,17 +90,23 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
         }}
       >
         <div className="p-4 border-b border-white/20 flex items-center justify-between">
-          <div>
-            <div className="text-white font-bold" style={{ fontFamily: 'Poppins, sans-serif', fontSize: '20px' }}>fundflow</div>
-            <div className="text-white/70 text-xs" style={{ fontFamily: 'Poppins, sans-serif' }}>Asset Manager Workbench</div>
-          </div>
-          <button
-            onClick={() => setIsSidebarPinned(!isSidebarPinned)}
-            className="text-white/70 hover:text-white transition-colors p-1 rounded"
-            title={isSidebarPinned ? 'Unpin sidebar' : 'Pin sidebar'}
-          >
-            {isSidebarPinned ? <Pin className="size-4 fill-current" /> : <Pin className="size-4" />}
-          </button>
+          {!isSidebarCollapsed ? (
+            <div>
+              <div className="text-white font-bold" style={{ fontFamily: 'Poppins, sans-serif', fontSize: '20px' }}>fundflow</div>
+              <div className="text-white/70 text-xs" style={{ fontFamily: 'Poppins, sans-serif' }}>Asset Manager Workbench</div>
+            </div>
+          ) : (
+            <div className="text-white font-bold text-xl">ff</div>
+          )}
+          {!isSidebarCollapsed && (
+            <button
+              onClick={() => setIsSidebarPinned(!isSidebarPinned)}
+              className="text-white/70 hover:text-white transition-colors p-1 rounded"
+              title={isSidebarPinned ? 'Unpin sidebar' : 'Pin sidebar'}
+            >
+              {isSidebarPinned ? <Pin className="size-4 fill-current" /> : <Pin className="size-4" />}
+            </button>
+          )}
         </div>
 
         <nav className="flex-1 p-4 space-y-1">
@@ -118,7 +123,8 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
                     : 'text-white/70 hover:text-white'
                 }`}
                 style={{
-                  backgroundColor: isActive ? 'rgba(255, 255, 255, 0.2)' : 'transparent'
+                  backgroundColor: isActive ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
+                  justifyContent: isSidebarCollapsed ? 'center' : 'flex-start'
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
@@ -130,9 +136,10 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
                     e.currentTarget.style.backgroundColor = 'transparent';
                   }
                 }}
+                title={isSidebarCollapsed ? item.label : ''}
               >
                 <Icon className="size-5" />
-                <span>{item.label}</span>
+                {!isSidebarCollapsed && <span>{item.label}</span>}
               </button>
             );
           })}
@@ -141,11 +148,13 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
         <div className="p-4 border-t border-white/20">
           <Button
             variant="ghost"
-            className="w-full justify-start gap-3 text-white/70 hover:text-white hover:bg-white/10"
+            className="w-full gap-3 text-white/70 hover:text-white hover:bg-white/10"
+            style={{ justifyContent: isSidebarCollapsed ? 'center' : 'flex-start' }}
             onClick={onLogout}
+            title={isSidebarCollapsed ? 'Sign Out' : ''}
           >
             <LogOut className="size-5" />
-            Sign Out
+            {!isSidebarCollapsed && 'Sign Out'}
           </Button>
         </div>
       </aside>
@@ -153,18 +162,14 @@ export function AssetManagerPortal({ onLogout }: AssetManagerPortalProps) {
       {/* Main Content */}
       <main className="flex-1 overflow-auto flex flex-col">
         <div className="border-b bg-white px-6 py-3 flex items-center justify-between">
-          {(!isSidebarPinned || isSidebarCollapsed) && (
+          {isSidebarCollapsed && (
             <button
               onClick={() => {
-                if (isSidebarPinned) {
-                  setIsSidebarCollapsed(!isSidebarCollapsed);
-                } else {
-                  setIsSidebarCollapsed(false);
-                  setIsSidebarPinned(true);
-                }
+                setIsSidebarCollapsed(false);
+                setIsSidebarPinned(true);
               }}
               className="text-slate-600 hover:text-slate-900 transition-colors p-1 rounded hover:bg-slate-100"
-              title="Toggle sidebar"
+              title="Expand sidebar"
             >
               <Menu className="size-6" />
             </button>

@@ -70,13 +70,12 @@ export function CounterpartyPortal({ onLogout }: CounterpartyPortalProps) {
     <div className="flex h-screen bg-slate-50">
       {/* Sidebar */}
       <aside 
-        className="bg-white border-r flex flex-col transition-all duration-300 ease-in-out relative"
+        className="bg-white border-r flex flex-col transition-all duration-300 ease-in-out relative overflow-hidden"
         style={{ 
-          width: isSidebarCollapsed && !isSidebarPinned ? '0px' : '256px',
-          marginLeft: isSidebarCollapsed && !isSidebarPinned ? '-256px' : '0px'
+          width: isSidebarCollapsed ? '64px' : '256px'
         }}
         onMouseEnter={() => {
-          if (!isSidebarPinned && isSidebarCollapsed) {
+          if (!isSidebarPinned) {
             setIsSidebarCollapsed(false);
           }
         }}
@@ -87,17 +86,23 @@ export function CounterpartyPortal({ onLogout }: CounterpartyPortalProps) {
         }}
       >
         <div className="p-4 border-b flex items-center justify-between">
-          <div>
-            <div className="text-slate-900 font-bold" style={{ fontFamily: 'Poppins, sans-serif', fontSize: '20px' }}>fundconnect</div>
-            <div className="text-slate-500 text-xs font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>Counterparty Portal</div>
-          </div>
-          <button
-            onClick={() => setIsSidebarPinned(!isSidebarPinned)}
-            className="text-slate-400 hover:text-slate-900 transition-colors p-1 rounded"
-            title={isSidebarPinned ? 'Unpin sidebar' : 'Pin sidebar'}
-          >
-            {isSidebarPinned ? <Pin className="size-4 fill-current" /> : <Pin className="size-4" />}
-          </button>
+          {!isSidebarCollapsed ? (
+            <div>
+              <div className="text-slate-900 font-bold" style={{ fontFamily: 'Poppins, sans-serif', fontSize: '20px' }}>fundconnect</div>
+              <div className="text-slate-500 text-xs font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>Counterparty Portal</div>
+            </div>
+          ) : (
+            <div className="text-slate-900 font-bold text-xl">fc</div>
+          )}
+          {!isSidebarCollapsed && (
+            <button
+              onClick={() => setIsSidebarPinned(!isSidebarPinned)}
+              className="text-slate-400 hover:text-slate-900 transition-colors p-1 rounded"
+              title={isSidebarPinned ? 'Unpin sidebar' : 'Pin sidebar'}
+            >
+              {isSidebarPinned ? <Pin className="size-4 fill-current" /> : <Pin className="size-4" />}
+            </button>
+          )}
         </div>
 
         <nav className="flex-1 p-4 space-y-1">
@@ -113,10 +118,14 @@ export function CounterpartyPortal({ onLogout }: CounterpartyPortalProps) {
                     ? 'text-white'
                     : 'text-slate-600 hover:bg-slate-50'
                 }`}
-                style={isActive ? { backgroundColor: branding.primaryColor } : undefined}
+                style={{
+                  backgroundColor: isActive ? branding.primaryColor : undefined,
+                  justifyContent: isSidebarCollapsed ? 'center' : 'flex-start'
+                }}
+                title={isSidebarCollapsed ? item.label : ''}
               >
                 <Icon className="size-5" />
-                <span>{item.label}</span>
+                {!isSidebarCollapsed && <span>{item.label}</span>}
               </button>
             );
           })}
@@ -125,11 +134,13 @@ export function CounterpartyPortal({ onLogout }: CounterpartyPortalProps) {
         <div className="p-4 border-t">
           <Button
             variant="ghost"
-            className="w-full justify-start gap-3"
+            className="w-full gap-3"
+            style={{ justifyContent: isSidebarCollapsed ? 'center' : 'flex-start' }}
             onClick={onLogout}
+            title={isSidebarCollapsed ? 'Sign Out' : ''}
           >
             <LogOut className="size-5" />
-            Sign Out
+            {!isSidebarCollapsed && 'Sign Out'}
           </Button>
         </div>
       </aside>
@@ -137,18 +148,14 @@ export function CounterpartyPortal({ onLogout }: CounterpartyPortalProps) {
       {/* Main Content */}
       <main className="flex-1 overflow-auto flex flex-col">
         <div className="border-b bg-white px-6 py-3 flex items-center justify-between">
-          {(!isSidebarPinned || isSidebarCollapsed) && (
+          {isSidebarCollapsed && (
             <button
               onClick={() => {
-                if (isSidebarPinned) {
-                  setIsSidebarCollapsed(!isSidebarCollapsed);
-                } else {
-                  setIsSidebarCollapsed(false);
-                  setIsSidebarPinned(true);
-                }
+                setIsSidebarCollapsed(false);
+                setIsSidebarPinned(true);
               }}
               className="text-slate-600 hover:text-slate-900 transition-colors p-1 rounded hover:bg-slate-100"
-              title="Toggle sidebar"
+              title="Expand sidebar"
             >
               <Menu className="size-6" />
             </button>
