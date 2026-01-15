@@ -192,8 +192,6 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
         </div>
       </main>
 
-    </div>
-
       {/* FenBot Floating Button - Outside main flex container for proper fixed positioning */}
       {!isFenBotOpen && (
         <button
@@ -220,5 +218,8 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
         onClose={() => setIsFenBotOpen(false)}
         onMinimize={() => setIsFenBotOpen(false)}
       />
+    </div>
+  );
+}
   );
 }
