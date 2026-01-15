@@ -1,6 +1,7 @@
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
+import { AMAIAssistant } from './AMAIAssistant';
 import { 
   TrendingUp, 
   Users, 
@@ -160,6 +161,13 @@ export function AMOverview({ onNavigate }: AMOverviewProps) {
           ))}
         </div>
       </div>
+
+      {/* AI Assistant */}
+      <AMAIAssistant 
+        workQueuesData={workQueues}
+        metricsData={metrics}
+        casesData={recentCases}
+      />
 
       {/* Recent Cases & Quick Actions */}
       <div className="grid lg:grid-cols-3 gap-6">
