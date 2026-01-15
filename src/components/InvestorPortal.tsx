@@ -221,5 +221,3 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
     </div>
   );
 }
-  );
-}
