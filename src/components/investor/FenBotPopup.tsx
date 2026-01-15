@@ -138,8 +138,13 @@ export function FenBotPopup({ isOpen, onClose, onMinimize }: FenBotPopupProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-24 right-6 w-96 max-h-[600px] bg-white rounded-xl shadow-2xl flex flex-col z-50 animate-in slide-in-from-bottom-5"
-      style={{ borderWidth: '2px', borderColor: `${branding.primaryColor}30` }}
+    <div 
+      className="fixed bottom-24 right-6 w-96 max-h-[600px] bg-white rounded-xl shadow-2xl flex flex-col animate-in slide-in-from-bottom-5"
+      style={{ 
+        borderWidth: '2px', 
+        borderColor: `${branding.primaryColor}30`,
+        zIndex: 9999
+      }}
     >
       {/* Header */}
       <div 

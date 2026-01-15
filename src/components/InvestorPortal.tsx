@@ -192,13 +192,16 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
         </div>
       </main>
 
-      {/* FenBot Floating Button */}
+    </div>
+
+      {/* FenBot Floating Button - Outside main flex container for proper fixed positioning */}
       {!isFenBotOpen && (
         <button
           onClick={() => setIsFenBotOpen(true)}
-          className="fixed bottom-6 right-6 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 z-40 group"
+          className="fixed bottom-6 right-6 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 group"
           style={{
-            background: `linear-gradient(to bottom right, ${branding.primaryColor}, ${branding.primaryColor}dd)`
+            background: `linear-gradient(to bottom right, ${branding.primaryColor}, ${branding.primaryColor}dd)`,
+            zIndex: 9999
           }}
         >
           <Sparkles className="size-7 text-white" />
@@ -217,6 +220,5 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
         onClose={() => setIsFenBotOpen(false)}
         onMinimize={() => setIsFenBotOpen(false)}
       />
-    </div>
   );
 }
