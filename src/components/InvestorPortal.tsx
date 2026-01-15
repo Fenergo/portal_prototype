@@ -11,9 +11,11 @@ import {
   Menu,
   ChevronLeft,
   Pin,
-  X
+  X,
+  Sparkles
 } from 'lucide-react';
 import { Button } from './ui/button';
+import { Badge } from './ui/badge';
 import { InvestorHome } from './investor/InvestorHome';
 import { InvestorInvest } from './investor/InvestorInvest';
 import { InvestorTrades } from './investor/InvestorTrades';
@@ -21,6 +23,7 @@ import { InvestorDocuments } from './investor/InvestorDocuments';
 import { InvestorMessages } from './investor/InvestorMessages';
 import { InvestorSettings } from './investor/InvestorSettings';
 import { AccountMaintenance } from './investor/AccountMaintenance';
+import { FenBotPopup } from './investor/FenBotPopup';
 import { useBranding } from './BrandingContext';
 
 interface InvestorPortalProps {
@@ -33,6 +36,7 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
   const [currentView, setCurrentView] = useState<InvestorView>('home');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isSidebarPinned, setIsSidebarPinned] = useState(true);
+  const [isFenBotOpen, setIsFenBotOpen] = useState(false);
   const { branding } = useBranding();
 
   const navItems = [
@@ -187,6 +191,32 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
           {renderView()}
         </div>
       </main>
+
+      {/* FenBot Floating Button */}
+      {!isFenBotOpen && (
+        <button
+          onClick={() => setIsFenBotOpen(true)}
+          className="fixed bottom-6 right-6 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 z-40 group"
+          style={{
+            background: `linear-gradient(to bottom right, ${branding.primaryColor}, ${branding.primaryColor}dd)`
+          }}
+        >
+          <Sparkles className="size-7 text-white" />
+          <Badge 
+            className="absolute -top-1 -right-1 bg-white text-xs px-1.5 animate-pulse"
+            style={{ color: branding.primaryColor }}
+          >
+            AI
+          </Badge>
+        </button>
+      )}
+
+      {/* FenBot Popup */}
+      <FenBotPopup 
+        isOpen={isFenBotOpen}
+        onClose={() => setIsFenBotOpen(false)}
+        onMinimize={() => setIsFenBotOpen(false)}
+      />
     </div>
   );
 }

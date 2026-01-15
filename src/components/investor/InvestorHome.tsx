@@ -2,7 +2,6 @@ import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { useBranding } from '../BrandingContext';
-import { AIAssistant } from './AIAssistant';
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -141,13 +140,6 @@ export function InvestorHome({ onNavigate }: InvestorHomeProps) {
           </div>
         </Card>
       </div>
-
-      {/* AI Assistant */}
-      <AIAssistant 
-        portfolioData={portfolios}
-        tasksData={tasks}
-        tradesData={null}
-      />
 
       {/* Portfolios & Tasks Grid */}
       <div className="grid lg:grid-cols-3 gap-6">
