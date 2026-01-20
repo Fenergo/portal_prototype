@@ -145,8 +145,12 @@ export function FenBotPopup({ isOpen, onClose, onMinimize }: FenBotPopupProps) {
 
   return (
     <div 
-      className="fixed bottom-6 right-6 w-[420px] h-[640px] bg-white rounded-xl shadow-2xl flex flex-col animate-in slide-in-from-right-5"
+      className="fixed right-6 w-[360px] bg-white rounded-xl shadow-2xl flex flex-col animate-in slide-in-from-right-5"
       style={{ 
+        top: '50%',
+        transform: 'translateY(-50%)',
+        height: 'calc(100vh - 100px)',
+        maxHeight: '720px',
         borderWidth: '2px', 
         borderColor: `${branding.primaryColor}30`,
         zIndex: 9999
