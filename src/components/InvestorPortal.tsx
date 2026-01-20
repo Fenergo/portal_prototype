@@ -72,10 +72,9 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
 
   return (
     <>
-      <div className="flex h-screen bg-slate-50">
-        {/* Sidebar */}
-        <aside 
-        className="bg-white border-r flex flex-col transition-all duration-300 ease-in-out relative overflow-hidden"
+      {/* Sidebar */}
+      <aside 
+        className="bg-white border-r flex flex-col transition-all duration-300 ease-in-out relative overflow-hidden fixed left-0 top-0 h-screen z-10"
         style={{ 
           width: isSidebarCollapsed ? '64px' : '256px'
         }}
@@ -151,7 +150,7 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto flex flex-col">
+      <main className="flex-1 overflow-auto flex flex-col bg-slate-50" style={{ marginLeft: isSidebarCollapsed ? '64px' : '256px', transition: 'margin-left 300ms ease-in-out' }}>
         <div className="border-b bg-white px-6 py-3 flex items-center justify-between">
           {isSidebarCollapsed && (
             <button
@@ -188,11 +187,10 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
             />
           </div>
         </div>
-        <div className="flex-1">
+        <div className="flex-1 h-full">
           {renderView()}
         </div>
       </main>
-      </div>
 
       {/* FenBot Floating Button - Completely outside main container */}
       {!isFenBotOpen && (
