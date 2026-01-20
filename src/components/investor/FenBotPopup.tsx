@@ -141,11 +141,11 @@ export function FenBotPopup({ isOpen, onClose, onMinimize }: FenBotPopupProps) {
     }
   };
 
+  if (!isOpen) return null;
+
   return (
     <div 
-      className={`fixed bottom-24 right-6 w-[380px] bg-white rounded-2xl shadow-2xl flex flex-col transition-all duration-300 ease-in-out ${
-        isOpen ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95 pointer-events-none'
-      }`}
+      className="fixed bottom-24 right-6 w-[380px] bg-white rounded-2xl shadow-2xl flex flex-col transition-all duration-300 ease-in-out animate-in slide-in-from-bottom-4 fade-in"
       style={{ 
         height: '600px',
         border: '1px solid #e5e7eb',
