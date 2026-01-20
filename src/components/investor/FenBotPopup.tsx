@@ -141,26 +141,23 @@ export function FenBotPopup({ isOpen, onClose, onMinimize }: FenBotPopupProps) {
     }
   };
 
-  if (!isOpen) return null;
-
   return (
     <div 
-      className="fixed right-6 w-[360px] bg-white rounded-xl shadow-2xl flex flex-col animate-in slide-in-from-right-5"
+      className={`fixed bottom-24 right-6 w-[380px] bg-white rounded-2xl shadow-2xl flex flex-col transition-all duration-300 ease-in-out ${
+        isOpen ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95 pointer-events-none'
+      }`}
       style={{ 
-        top: '50%',
-        transform: 'translateY(-50%)',
-        height: 'calc(100vh - 100px)',
-        maxHeight: '720px',
-        borderWidth: '2px', 
-        borderColor: `${branding.primaryColor}30`,
+        height: '600px',
+        border: '1px solid #e5e7eb',
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
         zIndex: 9999
       }}
     >
       {/* Header */}
       <div 
-        className="p-4 rounded-t-xl"
+        className="p-4 rounded-t-2xl border-b border-slate-100"
         style={{
-          background: `linear-gradient(to right, ${branding.primaryColor}, ${branding.primaryColor}dd)`
+          background: `linear-gradient(135deg, ${branding.primaryColor}, ${branding.primaryColor}dd)`
         }}
       >
         <div className="flex items-center justify-between">
@@ -212,7 +209,7 @@ export function FenBotPopup({ isOpen, onClose, onMinimize }: FenBotPopupProps) {
       </div>
 
       {/* Messages Area */}
-      <div className="flex-1 p-4 space-y-4 overflow-y-auto bg-gradient-to-b from-slate-50 to-white">
+      <div className="flex-1 p-4 space-y-4 overflow-y-auto bg-slate-50">
         {messages.length === 0 ? (
           <div className="text-center py-6 space-y-4">
             <div 
@@ -302,7 +299,7 @@ export function FenBotPopup({ isOpen, onClose, onMinimize }: FenBotPopupProps) {
       </div>
 
       {/* Input Area */}
-      <div className="p-4 bg-white border-t border-slate-200 rounded-b-xl">
+      <div className="p-4 bg-white border-t border-slate-100 rounded-b-2xl">
         <div className="flex gap-2">
           <Input
             placeholder="Ask me anything..."
