@@ -150,8 +150,8 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto flex flex-col bg-slate-50" style={{ marginLeft: isSidebarCollapsed ? '64px' : '256px', transition: 'margin-left 300ms ease-in-out' }}>
-        <div className="border-b bg-white px-6 py-3 flex items-center justify-between">
+      <main className="h-screen overflow-auto flex flex-col bg-slate-50" style={{ marginLeft: isSidebarCollapsed ? '64px' : '256px', transition: 'margin-left 300ms ease-in-out' }}>
+        <div className="border-b bg-white px-6 py-3 flex items-center justify-between shrink-0">
           {isSidebarCollapsed && (
             <button
               onClick={() => {
@@ -187,7 +187,7 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
             />
           </div>
         </div>
-        <div className="flex-1 h-full">
+        <div className="flex-1 overflow-auto">
           {renderView()}
         </div>
       </main>
