@@ -8,6 +8,7 @@ import {
   Send, 
   X,
   Minimize2,
+  Trash2,
   Clock,
   FileText,
   TrendingUp,
@@ -32,6 +33,11 @@ export function FenBotPopup({ isOpen, onClose, onMinimize }: FenBotPopupProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleClearChat = () => {
+    setMessages([]);
+    setInputValue('');
+  };
 
   const suggestedQueries = [
     {
@@ -139,7 +145,7 @@ export function FenBotPopup({ isOpen, onClose, onMinimize }: FenBotPopupProps) {
 
   return (
     <div 
-      className="fixed bottom-24 right-6 w-96 max-h-[600px] bg-white rounded-xl shadow-2xl flex flex-col animate-in slide-in-from-bottom-5"
+      className="fixed bottom-6 right-6 w-[420px] h-[640px] bg-white rounded-xl shadow-2xl flex flex-col animate-in slide-in-from-right-5"
       style={{ 
         borderWidth: '2px', 
         borderColor: `${branding.primaryColor}30`,
@@ -173,7 +179,18 @@ export function FenBotPopup({ isOpen, onClose, onMinimize }: FenBotPopupProps) {
               variant="ghost" 
               size="sm"
               className="text-white hover:bg-white/20 h-8 w-8 p-0"
+              onClick={handleClearChat}
+              title="Clear chat"
+              disabled={messages.length === 0}
+            >
+              <Trash2 className="size-4" />
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="sm"
+              className="text-white hover:bg-white/20 h-8 w-8 p-0"
               onClick={onMinimize}
+              title="Minimize"
             >
               <Minimize2 className="size-4" />
             </Button>
@@ -182,6 +199,7 @@ export function FenBotPopup({ isOpen, onClose, onMinimize }: FenBotPopupProps) {
               size="sm"
               className="text-white hover:bg-white/20 h-8 w-8 p-0"
               onClick={onClose}
+              title="Close"
             >
               <X className="size-4" />
             </Button>
