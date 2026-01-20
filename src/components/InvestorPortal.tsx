@@ -150,7 +150,7 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
       </aside>
 
       {/* Main Content */}
-      <main className="h-screen overflow-auto flex flex-col bg-slate-50" style={{ marginLeft: isSidebarCollapsed ? '64px' : '256px', transition: 'margin-left 300ms ease-in-out' }}>
+      <main className="h-screen flex flex-col bg-slate-50" style={{ marginLeft: isSidebarCollapsed ? '64px' : '256px', transition: 'margin-left 300ms ease-in-out' }}>
         <div className="border-b bg-white px-6 py-3 flex items-center justify-between shrink-0">
           {isSidebarCollapsed && (
             <button
