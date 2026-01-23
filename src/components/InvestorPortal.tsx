@@ -181,6 +181,10 @@ export function InvestorPortal({ onLogout }: InvestorPortalProps) {
                 ? '/portal_prototype/BR_logo.png'
                 : branding.logoUrl === 'azg'
                 ? '/portal_prototype/AzG_logo.png'
+                : branding.logoUrl === 'tmf'
+                ? '/portal_prototype/TMFLogo.jpg'
+                : branding.logoUrl === 'uiefa'
+                ? '/portal_prototype/UIeFA.png'
                 : '/portal_prototype/fen_logo.jpg'
               } 
               alt={branding.companyName}

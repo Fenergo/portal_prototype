@@ -25,6 +25,8 @@ export function AdminBranding() {
     { id: 'fenergo', name: 'Fenergo Logo', url: '/portal_prototype/fen_logo.jpg' },
     { id: 'br', name: 'BR Logo', url: '/portal_prototype/BR_logo.png' },
     { id: 'azg', name: 'AzG Logo', url: '/portal_prototype/AzG_logo.png' },
+    { id: 'tmf', name: 'TMF Logo', url: '/portal_prototype/TMFLogo.jpg' },
+    { id: 'uiefa', name: 'UIeFA Logo', url: '/portal_prototype/UIeFA.png' },
   ];
 
   const availableWatermarks = [
@@ -129,13 +131,36 @@ export function AdminBranding() {
                       alt="BR"
                       className="h-8 object-contain"
                     />
+                  ) : branding.logoUrl === 'azg' ? (
+                    <img 
+                      src="/portal_prototype/AzG_logo.png" 
+                      alt="AzG"
+                      className="h-8 object-contain"
+                    />
+                  ) : branding.logoUrl === 'tmf' ? (
+                    <img 
+                      src="/portal_prototype/TMFLogo.jpg" 
+                      alt="TMF"
+                      className="h-8 object-contain"
+                    />
+                  ) : branding.logoUrl === 'uiefa' ? (
+                    <img 
+                      src="/portal_prototype/UIeFA.png" 
+                      alt="UIeFA"
+                      className="h-8 object-contain"
+                    />
                   ) : (
                     <Palette className="size-8 text-slate-400" />
                   )}
                 </div>
                 <p className="text-slate-900 mb-2">Current Logo</p>
                 <p className="text-slate-500 mb-4">
-                  {branding.logoUrl === 'fenergo' ? 'Fenergo Logo' : branding.logoUrl === 'br' ? 'BR Logo' : 'No logo selected'}
+                  {branding.logoUrl === 'fenergo' ? 'Fenergo Logo' 
+                    : branding.logoUrl === 'br' ? 'BR Logo' 
+                    : branding.logoUrl === 'azg' ? 'AzG Logo'
+                    : branding.logoUrl === 'tmf' ? 'TMF Logo'
+                    : branding.logoUrl === 'uiefa' ? 'UIeFA Logo'
+                    : 'No logo selected'}
                 </p>
                 <Button 
                   variant="outline" 
