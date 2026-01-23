@@ -48,10 +48,10 @@ export function AdminBranding() {
 
   const presetThemes = [
     { name: 'Fenergo (Default)', primary: '#21CFB2', logo: 'fenergo' },
-    { name: 'Navy Blue', primary: '#1E40AF', logo: null },
+    { name: 'Navy Blue', primary: '#002C5F', logo: null },
     { name: 'Cyan', primary: '#00A2A9', logo: null },
     { name: 'Royal Purple', primary: '#7C3AED', logo: null },
-    { name: 'Crimson Red', primary: '#DC2626', logo: null },
+    { name: 'Crimson Red', primary: '#E30613', logo: null },
     { name: 'Slate Gray', primary: '#475569', logo: null },
   ];
 
