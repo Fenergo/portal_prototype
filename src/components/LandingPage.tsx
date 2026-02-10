@@ -203,6 +203,20 @@ export function LandingPage({ onLogin }: LandingPageProps) {
           <p>© 2025 Fenergo FundFlow. Prototype demonstrating institutional fund management capabilities.</p>
         </div>
       </footer>
+
+      {/* Bottom Right Button */}
+      <div className="fixed bottom-6 right-6 z-20">
+        <Button
+          variant="outline"
+          className="bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow"
+          onClick={() => {
+            // Link will be added later
+            console.log('Navigate to Front Office Prototypes');
+          }}
+        >
+          Go to Front Office Prototypes
+        </Button>
+      </div>
     </div>
   );
 }
