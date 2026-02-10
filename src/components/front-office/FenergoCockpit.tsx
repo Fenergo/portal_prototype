@@ -393,6 +393,15 @@ export function FenergoCockpit({ onBack }: FenergoCockpitProps) {
               <Button variant="ghost" size="sm" className="lg:hidden" onClick={() => setSidebarOpen(true)}>
                 <Menu className="h-5 w-5" />
               </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onBack}
+                className="gap-2 hidden lg:flex"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span className="text-sm">Back to Prototypes</span>
+              </Button>
               <div>
                 <h1 className="text-xl font-bold text-slate-900">Executive Cockpit</h1>
                 <div className="flex items-center gap-3 mt-0.5">
