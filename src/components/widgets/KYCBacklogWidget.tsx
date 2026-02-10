@@ -1,7 +1,6 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
-import { Badge } from '../ui/badge';
 
 const data = [
   { name: 'Mon', value: 45, details: { pending: 25, inProgress: 15, blocked: 5 } },
@@ -12,6 +11,18 @@ const data = [
   { name: 'Sat', value: 23, details: { pending: 15, inProgress: 6, blocked: 2 } },
   { name: 'Sun', value: 15, details: { pending: 10, inProgress: 4, blocked: 1 } },
 ];
+
+const CustomTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs shadow-xl">
+        <p className="font-semibold">{payload[0].payload.name}</p>
+        <p className="text-slate-300">{payload[0].value} cases</p>
+      </div>
+    );
+  }
+  return null;
+};
 
 export function KYCBacklogWidget() {
   const [selectedBar, setSelectedBar] = useState<typeof data[0] | null>(null);
@@ -28,76 +39,69 @@ export function KYCBacklogWidget() {
 
   return (
     <>
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <div>
-            <div className="text-2xl font-semibold" style={{ color: 'var(--fenergo-primary)' }}>
-              {total}
-            </div>
-            <div className="text-xs text-muted-foreground">Total Backlog</div>
-          </div>
-          <div className="text-xs text-muted-foreground text-right">
-            Click bars
-          </div>
+      <div className="flex flex-col h-full">
+        <div className="flex items-baseline gap-2 mb-4">
+          <span className="text-[28px] font-bold text-slate-900 tracking-tight leading-none">{total}</span>
+          <span className="text-[11px] text-slate-400 font-medium">total backlog</span>
         </div>
-        <ResponsiveContainer width="100%" height={140}>
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-            <XAxis dataKey="name" tick={{ fontSize: 10 }} />
-            <YAxis tick={{ fontSize: 10 }} />
-            <Tooltip />
-            <Bar dataKey="value" fill="var(--fenergo-primary)" radius={[4, 4, 0, 0]} cursor="pointer" onClick={handleBarClick}>
-              {data.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={selectedBar?.name === entry.name ? 'var(--fenergo-secondary)' : 'var(--fenergo-primary)'}
-                />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+        <div className="flex-1 min-h-[120px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={data} barCategoryGap="20%">
+              <XAxis
+                dataKey="name"
+                tick={{ fontSize: 11, fill: '#94a3b8' }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <Tooltip content={<CustomTooltip />} cursor={false} />
+              <Bar
+                dataKey="value"
+                radius={[6, 6, 6, 6]}
+                cursor="pointer"
+                onClick={handleBarClick}
+              >
+                {data.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={selectedBar?.name === entry.name ? '#0EA78A' : '#21CFB2'}
+                    opacity={selectedBar && selectedBar.name !== entry.name ? 0.4 : 1}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        <p className="text-[11px] text-slate-400 mt-2">Click a bar for details</p>
       </div>
 
       <Dialog open={detailOpen} onOpenChange={setDetailOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle>KYC Backlog Details - {selectedBar?.name}</DialogTitle>
-          </DialogHeader>
+        <DialogContent className="max-w-sm rounded-2xl p-0 gap-0 overflow-hidden">
+          <div className="p-6 bg-gradient-to-br from-[#21CFB2] to-[#0EA78A]">
+            <DialogHeader>
+              <DialogTitle className="text-white text-lg font-bold">
+                {selectedBar?.name} · {selectedBar?.value} Cases
+              </DialogTitle>
+            </DialogHeader>
+          </div>
           {selectedBar && (
-            <div className="space-y-4">
-              <div className="p-4 rounded-lg bg-primary/10 text-center">
-                <div className="text-3xl font-semibold" style={{ color: 'var(--fenergo-primary)' }}>
-                  {selectedBar.value}
-                </div>
-                <div className="text-sm text-muted-foreground">Total Cases</div>
-              </div>
-              
-              <div className="space-y-2">
-                <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50">
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline" className="bg-yellow-100 text-yellow-800 border-yellow-300">
-                      Pending
-                    </Badge>
+            <div className="p-6 space-y-3">
+              {[
+                { label: 'Pending', value: selectedBar.details.pending, color: 'bg-amber-500' },
+                { label: 'In Progress', value: selectedBar.details.inProgress, color: 'bg-blue-500' },
+                { label: 'Blocked', value: selectedBar.details.blocked, color: 'bg-rose-500' },
+              ].map(item => (
+                <div key={item.label} className="flex items-center justify-between py-2.5">
+                  <div className="flex items-center gap-3">
+                    <div className={`h-2.5 w-2.5 rounded-full ${item.color}`} />
+                    <span className="text-sm text-slate-600">{item.label}</span>
                   </div>
-                  <span className="font-semibold">{selectedBar.details.pending}</span>
+                  <span className="text-sm font-bold text-slate-900">{item.value}</span>
                 </div>
-                
-                <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50">
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline" className="bg-blue-100 text-blue-800 border-blue-300">
-                      In Progress
-                    </Badge>
-                  </div>
-                  <span className="font-semibold">{selectedBar.details.inProgress}</span>
-                </div>
-                
-                <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50">
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline" className="bg-red-100 text-red-800 border-red-300">
-                      Blocked
-                    </Badge>
-                  </div>
-                  <span className="font-semibold">{selectedBar.details.blocked}</span>
+              ))}
+              <div className="pt-3 border-t border-slate-100">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-slate-500">Total</span>
+                  <span className="text-lg font-bold text-slate-900">{selectedBar.value}</span>
                 </div>
               </div>
             </div>
