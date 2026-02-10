@@ -124,8 +124,6 @@ function SortableWidget({ widget, onExpand, onRemove }: { widget: Widget; onExpa
 }
 
 export function FenergoCockpit({ onBack }: FenergoCockpitProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [showFilters, setShowFilters] = useState(false);
   const [showAddWidget, setShowAddWidget] = useState(false);
   const [expandedWidget, setExpandedWidget] = useState<string | null>(null);
   const [timeRange, setTimeRange] = useState('today');
@@ -279,236 +277,107 @@ export function FenergoCockpit({ onBack }: FenergoCockpitProps) {
   }, {} as Record<string, Widget[]>);
 
   return (
-    <div className="h-screen flex bg-gradient-to-br from-slate-50 via-white to-slate-50">
-      {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex flex-col w-64 bg-gradient-to-b from-[#21CFB2] to-[#1AB09A] text-white shadow-xl">
-        <div className="p-6 border-b border-white/10">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="h-10 w-10 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
-              <Activity className="h-5 w-5" />
-            </div>
-            <div>
-              <div className="font-bold text-lg">Fenergo Cockpit</div>
-              <div className="text-xs text-white/80">Executive Dashboard</div>
-            </div>
-          </div>
-        </div>
-        
-        <ScrollArea className="flex-1 px-3 py-4">
-          <nav className="space-y-1">
-            <button className="w-full text-left px-3 py-2.5 rounded-lg bg-white/20 backdrop-blur-sm flex items-center gap-3 text-sm font-medium shadow-sm">
-              <Activity className="h-4 w-4" />
-              <span>Overview</span>
-            </button>
-            <button className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-white/10 flex items-center gap-3 text-sm">
-              <Shield className="h-4 w-4" />
-              <span>Compliance</span>
-            </button>
-            <button className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-white/10 flex items-center gap-3 text-sm">
-              <AlertTriangle className="h-4 w-4" />
-              <span>Risk</span>
-            </button>
-            <button className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-white/10 flex items-center gap-3 text-sm">
-              <TrendingUp className="h-4 w-4" />
-              <span>Operations</span>
-            </button>
-            <button className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-white/10 flex items-center gap-3 text-sm">
-              <Users className="h-4 w-4" />
-              <span>Analytics</span>
-            </button>
-          </nav>
-        </ScrollArea>
-
-        <div className="p-4 border-t border-white/10">
-          <Button
-            variant="ghost"
-            className="w-full justify-start gap-2 text-white hover:bg-white/10 text-sm"
-            onClick={onBack}
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span>Back to Prototypes</span>
-          </Button>
-        </div>
-      </aside>
-
-      {/* Mobile Sidebar */}
-      <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-        <SheetContent side="left" className="w-64 p-0 bg-gradient-to-b from-[#21CFB2] to-[#1AB09A] text-white border-r-0">
-          <div className="p-6 border-b border-white/10">
-            <div className="flex items-center gap-3 mb-1">
-              <div className="h-10 w-10 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <Activity className="h-5 w-5" />
-              </div>
-              <div>
-                <div className="font-bold text-lg">Fenergo Cockpit</div>
-                <div className="text-xs text-white/80">Executive Dashboard</div>
-              </div>
-            </div>
-          </div>
-          
-          <ScrollArea className="h-[calc(100vh-180px)] px-3 py-4">
-            <nav className="space-y-1">
-              <button className="w-full text-left px-3 py-2.5 rounded-lg bg-white/20 backdrop-blur-sm flex items-center gap-3 text-sm font-medium">
-                <Activity className="h-4 w-4" />
-                <span>Overview</span>
-              </button>
-              <button className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-white/10 flex items-center gap-3 text-sm">
-                <Shield className="h-4 w-4" />
-                <span>Compliance</span>
-              </button>
-              <button className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-white/10 flex items-center gap-3 text-sm">
-                <AlertTriangle className="h-4 w-4" />
-                <span>Risk</span>
-              </button>
-              <button className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-white/10 flex items-center gap-3 text-sm">
-                <TrendingUp className="h-4 w-4" />
-                <span>Operations</span>
-              </button>
-              <button className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-white/10 flex items-center gap-3 text-sm">
-                <Users className="h-4 w-4" />
-                <span>Analytics</span>
-              </button>
-            </nav>
-          </ScrollArea>
-
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10 bg-[#1AB09A]">
-            <Button
-              variant="ghost"
-              className="w-full justify-start gap-2 text-white hover:bg-white/10 text-sm"
-              onClick={onBack}
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span>Back to Prototypes</span>
-            </Button>
-          </div>
-        </SheetContent>
-      </Sheet>
-
+    <div className="h-screen flex flex-col bg-slate-50">
       {/* Main Content */}
       <main className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="bg-white border-b border-slate-200 px-6 py-4 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="sm" className="lg:hidden" onClick={() => setSidebarOpen(true)}>
-                <Menu className="h-5 w-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={onBack}
-                className="gap-2 hidden lg:flex"
-              >
-                <ArrowLeft className="h-4 w-4" />
-                <span className="text-sm">Back to Prototypes</span>
-              </Button>
-              <div>
-                <h1 className="text-xl font-bold text-slate-900">Executive Cockpit</h1>
-                <div className="flex items-center gap-3 mt-0.5">
-                  <p className="text-xs text-slate-600">Real-time operational intelligence</p>
-                  <Badge variant="outline" className="text-xs">
-                    <div className="h-1.5 w-1.5 rounded-full bg-green-500 mr-1.5 animate-pulse" />
-                    Live
-                  </Badge>
+        <header className="bg-white border-b border-slate-200 shadow-sm">
+          <div className="px-6 py-4">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onBack}
+                  className="gap-2"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  <span className="text-sm">Back to Prototypes</span>
+                </Button>
+                <div className="h-6 w-px bg-slate-300" />
+                <div>
+                  <h1 className="text-2xl font-bold text-slate-900">Fenergo Cockpit</h1>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <p className="text-sm text-slate-600">Executive Dashboard</p>
+                    <Badge variant="outline" className="text-xs border-green-200 bg-green-50">
+                      <div className="h-1.5 w-1.5 rounded-full bg-green-500 mr-1.5 animate-pulse" />
+                      Live
+                    </Badge>
+                  </div>
                 </div>
               </div>
+              
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" className="gap-2">
+                  <RefreshCw className="h-4 w-4" />
+                  <span className="hidden md:inline text-sm">Refresh</span>
+                </Button>
+                <Button variant="outline" size="sm" className="gap-2">
+                  <Download className="h-4 w-4" />
+                  <span className="hidden md:inline text-sm">Export</span>
+                </Button>
+                <Button
+                  onClick={() => setShowAddWidget(true)}
+                  size="sm"
+                  className="gap-2 bg-[#21CFB2] hover:bg-[#1AB09A] text-white shadow-sm font-semibold"
+                >
+                  <Plus className="h-4 w-4" />
+                  <span className="text-sm">Add Widget</span>
+                </Button>
+                <Button variant="ghost" size="sm" className="relative">
+                  <Bell className="h-4 w-4" />
+                  <span className="absolute top-0.5 right-0.5 h-2 w-2 bg-red-500 rounded-full" />
+                </Button>
+                <Button variant="ghost" size="sm">
+                  <Settings className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
-            
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="sm" className="gap-2 hidden sm:flex">
-                <RefreshCw className="h-4 w-4" />
-                <span className="text-sm">Refresh</span>
-              </Button>
-              <Button variant="ghost" size="sm" className="gap-2 hidden sm:flex">
-                <Download className="h-4 w-4" />
-                <span className="text-sm">Export</span>
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowFilters(!showFilters)}
-                className="gap-2"
+
+            {/* Quick Filters */}
+            <div className="flex items-center gap-3 flex-wrap">
+              <span className="text-sm font-medium text-slate-700">View:</span>
+              <div className="flex gap-2">
+                <Button variant="default" size="sm" className="h-8 bg-[#21CFB2] hover:bg-[#1AB09A] text-white">
+                  Overview
+                </Button>
+                <Button variant="outline" size="sm" className="h-8">
+                  Compliance
+                </Button>
+                <Button variant="outline" size="sm" className="h-8">
+                  Risk
+                </Button>
+                <Button variant="outline" size="sm" className="h-8">
+                  Operations
+                </Button>
+              </div>
+              <div className="h-4 w-px bg-slate-300 hidden md:block" />
+              <select 
+                value={timeRange} 
+                onChange={(e) => setTimeRange(e.target.value)}
+                className="text-sm border border-slate-300 rounded-md px-3 py-1.5 bg-white focus:outline-none focus:ring-2 focus:ring-[#21CFB2]/20 focus:border-[#21CFB2] hidden md:block"
               >
-                <Filter className="h-4 w-4" />
-                <span className="hidden sm:inline text-sm">Filters</span>
-              </Button>
-              <Button
-                size="sm"
-                onClick={() => setShowAddWidget(true)}
-                className="gap-2 bg-[#21CFB2] hover:bg-[#1AB09A] text-white shadow-sm"
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+                <option value="quarter">This Quarter</option>
+              </select>
+              <select 
+                value={region} 
+                onChange={(e) => setRegion(e.target.value)}
+                className="text-sm border border-slate-300 rounded-md px-3 py-1.5 bg-white focus:outline-none focus:ring-2 focus:ring-[#21CFB2]/20 focus:border-[#21CFB2] hidden md:block"
               >
-                <Plus className="h-4 w-4" />
-                <span className="hidden sm:inline text-sm">Add Widget</span>
-              </Button>
-              <Button variant="ghost" size="sm" className="relative">
-                <Bell className="h-4 w-4" />
-                <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full" />
-              </Button>
-              <Button variant="ghost" size="sm">
-                <Settings className="h-4 w-4" />
-              </Button>
+                <option value="all">All Regions</option>
+                <option value="emea">EMEA</option>
+                <option value="apac">APAC</option>
+                <option value="americas">Americas</option>
+              </select>
             </div>
           </div>
         </header>
 
-        {/* Filters Panel */}
-        {showFilters && (
-          <div className="border-b bg-slate-50/80 backdrop-blur-sm px-6 py-3 shadow-sm">
-            <div className="flex flex-wrap gap-4">
-              <div className="flex items-center gap-2">
-                <label className="text-xs font-medium text-slate-700">Time Range:</label>
-                <select 
-                  value={timeRange} 
-                  onChange={(e) => setTimeRange(e.target.value)}
-                  className="text-xs border border-slate-200 rounded-md px-3 py-1.5 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#21CFB2]/20 focus:border-[#21CFB2]"
-                >
-                  <option value="today">Today</option>
-                  <option value="week">This Week</option>
-                  <option value="month">This Month</option>
-                  <option value="quarter">This Quarter</option>
-                </select>
-              </div>
-              <div className="flex items-center gap-2">
-                <label className="text-xs font-medium text-slate-700">Region:</label>
-                <select 
-                  value={region} 
-                  onChange={(e) => setRegion(e.target.value)}
-                  className="text-xs border border-slate-200 rounded-md px-3 py-1.5 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#21CFB2]/20 focus:border-[#21CFB2]"
-                >
-                  <option value="all">All Regions</option>
-                  <option value="emea">EMEA</option>
-                  <option value="apac">APAC</option>
-                  <option value="americas">Americas</option>
-                </select>
-              </div>
-              <div className="flex items-center gap-2">
-                <label className="text-xs font-medium text-slate-700">Risk Level:</label>
-                <select className="text-xs border border-slate-200 rounded-md px-3 py-1.5 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#21CFB2]/20 focus:border-[#21CFB2]">
-                  <option>All Levels</option>
-                  <option>Critical</option>
-                  <option>High</option>
-                  <option>Medium</option>
-                  <option>Low</option>
-                </select>
-              </div>
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="ml-auto text-xs"
-                onClick={() => {
-                  setTimeRange('today');
-                  setRegion('all');
-                  toast.success('Filters reset');
-                }}
-              >
-                Reset Filters
-              </Button>
-            </div>
-          </div>
-        )}
-
         {/* Dashboard Grid */}
-        <ScrollArea className="flex-1 p-6">
+        <ScrollArea className="flex-1 p-6 bg-slate-50">
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
@@ -518,7 +387,7 @@ export function FenergoCockpit({ onBack }: FenergoCockpitProps) {
               items={activeWidgets.map(w => w.id)}
               strategy={rectSortingStrategy}
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-fr">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 auto-rows-fr max-w-[1920px] mx-auto">
                 {activeWidgets.map((widget) => (
                   <SortableWidget
                     key={widget.id}
@@ -532,16 +401,19 @@ export function FenergoCockpit({ onBack }: FenergoCockpitProps) {
           </DndContext>
 
           {activeWidgets.length === 0 && (
-            <div className="flex flex-col items-center justify-center h-96 text-center">
-              <div className="h-20 w-20 rounded-full bg-slate-100 flex items-center justify-center mb-4">
-                <Activity className="h-10 w-10 text-slate-400" />
+            <div className="flex flex-col items-center justify-center h-[calc(100vh-200px)]">
+              <div className="h-24 w-24 rounded-2xl bg-gradient-to-br from-[#21CFB2] to-[#1AB09A] flex items-center justify-center mb-6 shadow-lg">
+                <Activity className="h-12 w-12 text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-slate-900 mb-2">No widgets on dashboard</h3>
-              <p className="text-sm text-slate-600 mb-4 max-w-sm">
-                Get started by adding widgets to customize your executive dashboard.
+              <h3 className="text-2xl font-bold text-slate-900 mb-3">Welcome to Your Dashboard</h3>
+              <p className="text-base text-slate-600 mb-6 max-w-md text-center">
+                Start building your executive cockpit by adding widgets that matter most to you.
               </p>
-              <Button onClick={() => setShowAddWidget(true)} className="bg-[#21CFB2] hover:bg-[#1AB09A]">
-                <Plus className="h-4 w-4 mr-2" />
+              <Button 
+                onClick={() => setShowAddWidget(true)} 
+                className="bg-[#21CFB2] hover:bg-[#1AB09A] text-white px-6 py-2 text-base font-semibold shadow-lg"
+              >
+                <Plus className="h-5 w-5 mr-2" />
                 Add Your First Widget
               </Button>
             </div>
@@ -551,47 +423,82 @@ export function FenergoCockpit({ onBack }: FenergoCockpitProps) {
 
       {/* Add Widget Dialog */}
       <Dialog open={showAddWidget} onOpenChange={setShowAddWidget}>
-        <DialogContent className="max-w-4xl max-h-[85vh] overflow-hidden">
+        <DialogContent className="max-w-5xl max-h-[85vh] overflow-hidden">
           <DialogHeader>
-            <DialogTitle className="text-xl">Add Widget to Dashboard</DialogTitle>
-            <DialogDescription>Choose from available widgets to customize your executive cockpit</DialogDescription>
+            <DialogTitle className="text-2xl font-bold">Add Widget to Dashboard</DialogTitle>
+            <DialogDescription className="text-base">
+              Choose from available widgets to customize your executive cockpit
+            </DialogDescription>
           </DialogHeader>
           
-          <ScrollArea className="h-[60vh] pr-4">
-            <div className="space-y-6">
+          <ScrollArea className="h-[65vh] pr-4">
+            <div className="space-y-8">
               {Object.entries(widgetsByCategory).length > 0 ? (
                 Object.entries(widgetsByCategory).map(([category, widgets]) => (
                   <div key={category}>
-                    <h3 className="text-sm font-semibold text-slate-900 mb-3 flex items-center gap-2">
-                      {category === 'Compliance' && <Shield className="h-4 w-4 text-[#21CFB2]" />}
-                      {category === 'Risk' && <AlertTriangle className="h-4 w-4 text-orange-500" />}
-                      {category === 'Operations' && <TrendingUp className="h-4 w-4 text-blue-500" />}
-                      {category}
-                    </h3>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="flex items-center gap-3 mb-4">
+                      {category === 'Compliance' && (
+                        <div className="h-8 w-8 rounded-lg bg-[#21CFB2]/10 flex items-center justify-center">
+                          <Shield className="h-4 w-4 text-[#21CFB2]" />
+                        </div>
+                      )}
+                      {category === 'Risk' && (
+                        <div className="h-8 w-8 rounded-lg bg-orange-100 flex items-center justify-center">
+                          <AlertTriangle className="h-4 w-4 text-orange-600" />
+                        </div>
+                      )}
+                      {category === 'Operations' && (
+                        <div className="h-8 w-8 rounded-lg bg-blue-100 flex items-center justify-center">
+                          <TrendingUp className="h-4 w-4 text-blue-600" />
+                        </div>
+                      )}
+                      <h3 className="text-lg font-bold text-slate-900">{category}</h3>
+                      <Badge variant="secondary" className="ml-auto">
+                        {widgets.length} available
+                      </Badge>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {widgets.map((widget) => (
                         <Card
                           key={widget.id}
-                          className="p-4 cursor-pointer hover:shadow-lg hover:border-[#21CFB2] transition-all duration-200 group"
+                          className="p-5 cursor-pointer hover:shadow-xl hover:border-[#21CFB2] hover:scale-105 transition-all duration-200 group bg-white"
                           onClick={() => handleAddWidget(widget)}
                         >
                           <div className="flex items-start justify-between mb-3">
                             <div className="flex-1">
-                              <h4 className="text-sm font-semibold text-slate-900 mb-1 group-hover:text-[#21CFB2] transition-colors">{widget.title}</h4>
-                              <Badge variant="secondary" className="text-xs">{widget.type}</Badge>
+                              <h4 className="text-base font-bold text-slate-900 mb-2 group-hover:text-[#21CFB2] transition-colors">
+                                {widget.title}
+                              </h4>
+                              <div className="flex gap-2 flex-wrap">
+                                <Badge variant="outline" className="text-xs">
+                                  {widget.type}
+                                </Badge>
+                                <Badge variant="secondary" className="text-xs">
+                                  {widget.size}
+                                </Badge>
+                              </div>
                             </div>
-                            <Plus className="h-4 w-4 text-slate-400 group-hover:text-[#21CFB2] transition-colors" />
+                            <div className="ml-3 h-10 w-10 rounded-lg bg-[#21CFB2]/10 group-hover:bg-[#21CFB2] flex items-center justify-center transition-colors">
+                              <Plus className="h-5 w-5 text-[#21CFB2] group-hover:text-white transition-colors" />
+                            </div>
                           </div>
-                          <p className="text-xs text-slate-600">Click to add to dashboard</p>
+                          <p className="text-sm text-slate-600">
+                            Click to add this widget to your dashboard
+                          </p>
                         </Card>
                       ))}
                     </div>
                   </div>
                 ))
               ) : (
-                <div className="text-center py-12">
-                  <Activity className="h-12 w-12 text-slate-300 mx-auto mb-3" />
-                  <p className="text-sm text-slate-600">All available widgets are already on your dashboard</p>
+                <div className="text-center py-16">
+                  <div className="h-20 w-20 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-4">
+                    <Activity className="h-10 w-10 text-slate-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">All widgets added!</h3>
+                  <p className="text-base text-slate-600">
+                    All available widgets are already on your dashboard
+                  </p>
                 </div>
               )}
             </div>
