@@ -4,6 +4,7 @@ import { InvestorPortal } from './components/InvestorPortal';
 import { AssetManagerPortal } from './components/AssetManagerPortal';
 import { CounterpartyPortal } from './components/CounterpartyPortal';
 import { FrontOfficeVision } from './components/FrontOfficeVision';
+import { FenergoCockpit } from './components/front-office/FenergoCockpit';
 import { BrandingProvider } from './components/BrandingContext';
 
 export type UserRole = 'investor' | 'asset-manager' | 'counterparty' | null;
@@ -32,15 +33,19 @@ export default function App() {
     setFrontOfficeView('landing');
   };
 
+  const handleBackToFrontOffice = () => {
+    setFrontOfficeView('front-office');
+  };
+
   const handleSelectPrototype = (prototype: 'cockpit' | 'radar' | 'pulse') => {
     setFrontOfficeView(prototype);
-    // Dashboards will be implemented later
-    console.log(`Selected prototype: ${prototype}`);
   };
 
   return (
     <BrandingProvider>
-      {frontOfficeView === 'front-office' ? (
+      {frontOfficeView === 'cockpit' ? (
+        <FenergoCockpit onBack={handleBackToFrontOffice} />
+      ) : frontOfficeView === 'front-office' ? (
         <FrontOfficeVision 
           onBack={handleBackToLanding}
           onSelectPrototype={handleSelectPrototype}

@@ -1,6 +1,7 @@
 
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
+import { Toaster } from "./components/ui/sonner";
 import "./index.css";
 
 const rootElement = document.getElementById("root");
@@ -10,7 +11,12 @@ if (!rootElement) {
 }
 
 try {
-  createRoot(rootElement).render(<App />);
+  createRoot(rootElement).render(
+    <>
+      <App />
+      <Toaster />
+    </>
+  );
 } catch (error) {
   console.error("Failed to render app:", error);
   rootElement.innerHTML = `
