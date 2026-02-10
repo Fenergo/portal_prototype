@@ -6,9 +6,10 @@ import { useBranding } from './BrandingContext';
 
 interface LandingPageProps {
   onLogin: (role: UserRole) => void;
+  onNavigateToFrontOffice: () => void;
 }
 
-export function LandingPage({ onLogin }: LandingPageProps) {
+export function LandingPage({ onLogin, onNavigateToFrontOffice }: LandingPageProps) {
   const { branding } = useBranding();
 
   const getWatermarkStyle = () => {
@@ -209,10 +210,7 @@ export function LandingPage({ onLogin }: LandingPageProps) {
         <Button
           variant="outline"
           className="bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow"
-          onClick={() => {
-            // Link will be added later
-            console.log('Navigate to Front Office Prototypes');
-          }}
+          onClick={onNavigateToFrontOffice}
         >
           Go to Front Office Prototypes
         </Button>
